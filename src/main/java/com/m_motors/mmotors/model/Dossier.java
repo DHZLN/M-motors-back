@@ -1,14 +1,17 @@
 package com.m_motors.mmotors.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "dossiers")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -18,43 +21,31 @@ public class Dossier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private User client;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "vehicule_id", nullable = false)
     private Vehicle vehicule;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TypeOffre typeOffre;
+    private TypeOffre typeOffre; // ACHAT ou LLD
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @Builder.Default
-private StatutDossier statut = StatutDossier.EN_ATTENTE_DOCUMENTS;
+    private StatutDossier statut; // EN_ATTENTE_DOCUMENTS, EN_COURS_ANALYSE, ACCEPTE, REFUSE
 
-    // Options LLD
+    private LocalDateTime dateCreation;
+    private LocalDateTime dateDerniereMiseajour;
+
+    // Options sélectionnées
     private Boolean assuranceTousRisques;
     private Boolean assistanceDepannage;
     private Boolean entretienEtSav;
     private Boolean controleTechniqueInclus;
 
-    private LocalDateTime dateCreation;
-    private LocalDateTime dateDerniereMiseAJour;
-
-    @OneToMany(mappedBy = "dossier", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "dossier", cascade = CascadeType.ALL)
     private List<Document> documents;
-
-    @PrePersist
-    public void prePersist() {
-        dateCreation = LocalDateTime.now();
-        dateDerniereMiseAJour = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        dateDerniereMiseAJour = LocalDateTime.now();
-    }
 }

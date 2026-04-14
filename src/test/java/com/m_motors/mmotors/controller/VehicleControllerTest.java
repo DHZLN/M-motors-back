@@ -12,6 +12,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -86,7 +87,7 @@ class VehicleControllerTest {
                 .description("Berline premium")
                 .build();
 
-        when(vehicleService.getVehiculeById(1L)).thenReturn(vehicle);
+        when(vehicleService.getVehiculeById(1L)).thenReturn(Optional.of(vehicle));
 
         mockMvc.perform(get("/vehicules/1"))
                 .andExpect(status().isOk())
@@ -97,7 +98,7 @@ class VehicleControllerTest {
     @Test
     @WithMockUser
     void detailVehicule_shouldRedirectWhenVehicleDoesNotExist() throws Exception {
-        when(vehicleService.getVehiculeById(999L)).thenReturn(null);
+        when(vehicleService.getVehiculeById(999L)).thenReturn(Optional.empty());
 
         mockMvc.perform(get("/vehicules/999"))
                 .andExpect(status().is3xxRedirection())

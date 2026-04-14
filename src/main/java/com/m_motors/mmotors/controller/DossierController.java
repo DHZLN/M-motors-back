@@ -1,81 +1,111 @@
 package com.m_motors.mmotors.controller;
 
 import com.m_motors.mmotors.model.Dossier;
+import com.m_motors.mmotors.model.StatutDossier;
+import com.m_motors.mmotors.model.TypeOffre;
 import com.m_motors.mmotors.model.User;
 import com.m_motors.mmotors.model.Vehicle;
-import com.m_motors.mmotors.service.DossierService;
+import com.m_motors.mmotors.repository.DossierRepository;
+import com.m_motors.mmotors.repository.VehicleRepository;
 import com.m_motors.mmotors.service.UserService;
-import com.m_motors.mmotors.service.VehicleService;
-import org.springframework.security.core.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
-@RequestMapping("/dossiers")
+@PreAuthorize("hasRole('CLIENT')")
 public class DossierController {
 
-    private final DossierService dossierService;
-    private final UserService userService;
-    private final VehicleService vehicleService;
+    @Autowired
+    private DossierRepository dossierRepository;
 
-    public DossierController(DossierService dossierService, UserService userService, VehicleService vehicleService) {
-        this.dossierService = dossierService;
-        this.userService = userService;
-        this.vehicleService = vehicleService;
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/dossiers")
+    public String mesDossiers(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String email = userDetails.getUsername();
+
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + email));
+
+        List<Dossier> dossiers = dossierRepository.findByClientId(user.getId());
+
+        model.addAttribute("dossiers", dossiers);
+        model.addAttribute("title", "Mes Dossiers - M-Motors");
+        return "client/dossiers";
     }
 
-    @GetMapping("/creer/{vehiculeId}")
-    public String showDossierForm(@PathVariable Long vehiculeId, Model model, Authentication authentication) {
-        Vehicle vehicule = vehicleService.getVehiculeById(vehiculeId);
+    @GetMapping("/dossiers/nouveau")
+    public String nouveauDossier(Model model) {
+        List<Vehicle> vehicules = vehicleRepository.findAll();
 
-        if (vehicule == null) {
-            return "redirect:/vehicules";
-        }
+        model.addAttribute("vehicules", vehicules);
+        model.addAttribute("title", "Nouveau Dossier - M-Motors");
+        return "client/nouveau-dossier";
+    }
 
-        User user = userService.findByEmail(authentication.getName());
+    @PostMapping("/dossiers")
+    public String creerDossier(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam("typeOffre") String typeOffre,
+            @RequestParam("vehiculeId") Long vehiculeId,
+            @RequestParam(value = "budget", required = false) Double budget,
+            @RequestParam(value = "commentaire", required = false) String commentaire) {
+
+        String email = userDetails.getUsername();
+
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + email));
+
+        Vehicle vehicle = vehicleRepository.findById(vehiculeId)
+                .orElseThrow(() -> new RuntimeException("Véhicule non trouvé"));
 
         Dossier dossier = new Dossier();
-        dossier.setVehicule(vehicule);
         dossier.setClient(user);
-        dossier.setTypeOffre(vehicule.getTypeOffre());
+        dossier.setVehicule(vehicle);
+        dossier.setTypeOffre(TypeOffre.valueOf(typeOffre));
+        dossier.setStatut(StatutDossier.EN_ATTENTE_DOCUMENTS);
+        dossier.setDateCreation(LocalDateTime.now());
+
+        dossierRepository.save(dossier);
+
+        return "redirect:/dossiers?success=created";
+    }
+
+    @GetMapping("/dossiers/{id}")
+    public String detailDossier(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model) {
+
+        String email = userDetails.getUsername();
+
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + email));
+
+        Dossier dossier = dossierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dossier non trouvé"));
+
+        if (!dossier.getClient().getId().equals(user.getId())) {
+            throw new RuntimeException("Accès non autorisé à ce dossier");
+        }
 
         model.addAttribute("dossier", dossier);
-        model.addAttribute("vehicule", vehicule);
-
-        return "dossier/creer";
-    }
-
-    @PostMapping("/creer")
-    public String creerDossier(@ModelAttribute Dossier dossier, Authentication authentication, Model model) {
-        User user = userService.findByEmail(authentication.getName());
-        Vehicle vehicule = vehicleService.getVehiculeById(dossier.getVehicule().getId());
-
-        if (user == null || vehicule == null) {
-            return "redirect:/vehicules";
-        }
-
-        dossier.setClient(user);
-        dossier.setVehicule(vehicule);
-        dossier.setTypeOffre(vehicule.getTypeOffre());
-
-        Dossier savedDossier = dossierService.creerDossier(dossier);
-
-        model.addAttribute("dossier", savedDossier);
-        model.addAttribute("success", "Votre dossier a bien été créé.");
-
-        return "dossier/confirmation";
-    }
-
-    @GetMapping("/mes-dossiers")
-    public String clientDashboard(Authentication authentication, Model model) {
-        User user = userService.findByEmail(authentication.getName());
-
-        if (user == null) {
-            return "redirect:/login";
-        }
-
-        model.addAttribute("dossiers", dossierService.getDossiersByClientId(user.getId()));
-        return "client/dashboard";
+        model.addAttribute("title", "Dossier #" + id + " - M-Motors");
+        return "client/detail-dossier";
     }
 }

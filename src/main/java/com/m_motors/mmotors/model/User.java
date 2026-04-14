@@ -1,15 +1,11 @@
 package com.m_motors.mmotors.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -19,28 +15,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Le prénom est obligatoire")
+    @Column(nullable = false)
     private String prenom;
 
-    @NotBlank(message = "Le nom est obligatoire")
+    @Column(nullable = false)
     private String nom;
 
-    @Email(message = "L'email doit être valide")
-    @NotBlank(message = "L'email est obligatoire")
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank(message = "Le mot de passe est obligatoire")
     @Column(nullable = false)
     private String password;
 
-@Builder.Default
-@Column(nullable = false)
-private String role = "CLIENT"; // Rôle par défaut
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @Builder.Default
+    private Role role = Role.CLIENT;
 
-@Builder.Default
-private boolean enabled = false; // Compte désactivé jusqu'à confirmation
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Dossier> dossiers;
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean enabled = true;
 }

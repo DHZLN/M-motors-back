@@ -1,14 +1,14 @@
 package com.m_motors.mmotors.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.*;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "vehicles")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -18,30 +18,24 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "La marque est obligatoire")
     private String marque;
-
-    @NotBlank(message = "Le modèle est obligatoire")
     private String modele;
-
     private Integer annee;
     private Integer kilometrage;
+    private String description;
+
     private Double prixAchat;
     private Double loyerMensuel;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TypeOffre typeOffre; // ACHAT ou LLD
+    private TypeOffre typeOffre;
 
     private String photoUrl;
-    private String description;
 
-    // Options pour la LLD
+    // Options incluses
     private Boolean assuranceIncluse;
     private Boolean assistanceIncluse;
     private Boolean entretienInclu;
     private Boolean controleTechniqueInclus;
-
-    @OneToMany(mappedBy = "vehicule")
-    private List<Dossier> dossiers;
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+     
+      lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Mes Dossiers - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Header -->
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main>
+        <div class="container">
+            <h1>Mes Dossiers</h1>
+
+            <div class="dossier-actions">
+                <a th:href="@{/dossiers/nouveau}" class="btn-primary">Créer un nouveau dossier</a>
+                <a th:href="@{/client/dashboard}" class="btn-secondary">Retour au menu</a>
+            </div>
+
+            <!-- Message de succès -->
+            <div th:if="${param.success}" class="alert alert-success">
+                Votre dossier a été créé avec succès !
+            </div>
+
+            <div th:if="${dossiers == null or dossiers.isEmpty()}" class="alert alert-info">
+                <p>Vous n'avez aucun dossier en cours. Commencez par <a th:href="@{/dossiers/nouveau}">créer un nouveau dossier</a>.</p>
+            </div>
+
+            <div th:if="${dossiers != null and !dossiers.isEmpty()}" class="dossiers-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Véhicule</th>
+                            <th>Statut</th>
+                            <th>Type d'offre</th>
+                            <th>Date création</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dossier : ${dossiers}">
+                            <td th:text="${dossier.id}"></td>
+                            <td>
+                                <span th:if="${dossier.vehicule != null}" 
+                                      th:text="${dossier.vehicule.marque + ' ' + dossier.vehicule.modele}">
+                                </span>
+                                <span th:unless="${dossier.vehicule != null}">-</span>
+                            </td>
+                            <td>
+                                <span th:class="${'statut-' + #strings.toLowerCase(dossier.statut)}"
+                                      th:text="${dossier.statut}"></span>
+                            </td>
+                            <td th:text="${dossier.typeOffre}"></td>
+                            <td th:text="${#temporals.format(dossier.dateCreation, 'dd/MM/yyyy HH:mm')}"></td>
+                            <td>
+                                <a th:href="@{/dossiers/{id}(id=${dossier.id})}" class="btn-small">Voir</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

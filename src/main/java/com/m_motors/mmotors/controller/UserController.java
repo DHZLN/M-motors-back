@@ -15,7 +15,7 @@ public class UserController { // Pas @Controller pour l'instant
     }
 
     public String registerUser(User user) {
-        userService.inscrire(user);
+       userService.registerUser(user.getPrenom(), user.getNom(), user.getEmail(), user.getPassword()); // CORRECT
         return "inscription-success"; // Ou redirection vers connexion
     }
 

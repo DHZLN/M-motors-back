@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Tableau de Bord Admin - M-Motors</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header>
+    <!-- Utilise une classe spécifique pour le header admin si nécessaire pour le style -->
+    <header class="admin-header">
         <nav>
-            <a href="/admin/dashboard">Tableau de Bord</a>
-            <a href="/admin/dossiers">Gérer les Dossiers</a>
-            <a href="/admin/vehicules">Gérer les Véhicules</a>
-            <a href="/admin/utilisateurs">Gérer les Utilisateurs</a>
-            <a href="/deconnexion">Déconnexion</a>
+            <a th:href="@{/admin/dashboard}">Tableau de Bord</a>
+            <a th:href="@{/admin/dossiers}">Gérer les Dossiers</a>
+            <a th:href="@{/admin/vehicules}">Gérer les Véhicules</a>
+            <a th:href="@{/admin/utilisateurs}">Gérer les Utilisateurs</a>
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit">Déconnexion</button>
+            </form>
         </nav>
     </header>
     <main>
-        <h1>Tableau de Bord Administrateur</h1>
-        <p>Vue d'ensemble et gestion des opérations de M-Motors.</p>
+        <div class="container">
+            <h1>Tableau de Bord Administrateur</h1>
+            <p>Vue d'ensemble et gestion des opérations de M-Motors.</p>
 
-        <h2>Statistiques Rapides</h2>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Dossiers en Attente</h3>
-                <p class="stat-number">15</p>
-            </div>
-            <div class="stat-card">
-                <h3>Nouveaux Clients (aujourd'hui)</h3>
-                <p class="stat-number">3</p>
-            </div>
-            <div class="stat-card">
-                <h3>Véhicules en Stock</h3>
-                <p class="stat-number">120</p>
+            <h2>Statistiques Rapides</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Dossiers en Attente</h3>
+                    <p class="stat-number">15</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Nouveaux Clients (aujourd'hui)</h3>
+                    <p class="stat-number">3</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Véhicules en Stock</h3>
+                    <p class="stat-number">120</p>
+                </div>
             </div>
         </div>
     </main>

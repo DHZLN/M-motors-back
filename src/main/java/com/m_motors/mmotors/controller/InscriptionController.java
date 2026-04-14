@@ -34,7 +34,7 @@ public class InscriptionController {
         }
 
         try {
-            userService.inscrire(user);
+         userService.registerUser(user.getPrenom(), user.getNom(), user.getEmail(), user.getPassword()); // CORRECT
             model.addAttribute("success", "Inscription réussie ! Vous pouvez maintenant vous connecter.");
             return "login";
         } catch (IllegalArgumentException e) {

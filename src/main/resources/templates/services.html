@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="standard-page">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Nos Services</h1>
+                <p>
+                    Une expérience premium pensée pour vous accompagner à chaque étape,
+                    de la découverte du véhicule jusqu’au suivi de votre dossier.
+                </p>
+            </div>
+        </section>
+
+        <section class="container page-section">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Location Longue Durée</h3>
+                    <p>
+                        Profitez d’une formule souple avec loyer mensuel, idéale pour rouler
+                        avec un véhicule premium sans contrainte d’achat immédiat.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Achat de véhicules</h3>
+                    <p>
+                        Découvrez une sélection de véhicules soigneusement choisis pour leur
+                        qualité, leur élégance et leur excellent état général.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Assurance</h3>
+                    <p>
+                        Des solutions adaptées pour sécuriser votre véhicule et vous offrir
+                        une sérénité totale au quotidien.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Assistance dépannage</h3>
+                    <p>
+                        En cas d’imprévu, bénéficiez d’une assistance rapide et efficace pour
+                        reprendre la route dans les meilleures conditions.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Entretien & SAV</h3>
+                    <p>
+                        Un accompagnement professionnel pour l’entretien régulier, le suivi
+                        technique et la qualité de service après-vente.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Contrôle technique</h3>
+                    <p>
+                        Une prise en charge simplifiée pour vous garantir conformité,
+                        sécurité et tranquillité d’esprit.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container page-section page-cta">
+            <div class="cta-box">
+                <h2>Un accompagnement sur mesure</h2>
+                <p>
+                    Chez M-Motors, nous combinons expertise, simplicité et qualité de service
+                    pour vous proposer une expérience haut de gamme, aussi bien à l’achat
+                    qu’en location longue durée.
+                </p>
+                <a th:href="@{/vehicules}" class="btn-primary">Découvrir nos véhicules</a>
+            </div>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

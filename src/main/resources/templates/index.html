@@ -1,27 +1,148 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Accueil - M-Motors</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Motors - Accueil</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/">Accueil</a>
-            <a href="/vehicules">Nos Véhicules</a>
-            <a href="/inscription">S'inscrire</a>
-            <a href="/connexion">Se connecter</a>
-            <!-- Liens conditionnels plus tard (client/admin) -->
-        </nav>
-    </header>
-    <main>
-        <h1>Bienvenue chez M-Motors !</h1>
-        <p>Votre partenaire pour l'achat et la location longue durée de véhicules.</p>
-        <a href="/vehicules" class="button">Voir nos véhicules</a>
-    </main>
-    <footer>
-        <p>&copy; 2026 M-Motors. Tous droits réservés.</p>
-    </footer>
+
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <!-- HERO -->
+    <section class="hero hero-home">
+        <div class="hero-bg-zoom"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-inner container reveal">
+            <div class="hero-text">
+                <p class="hero-kicker">M-MOTORS • ACHAT & LOCATION LONGUE DURÉE</p>
+                <h1>L'excellence automobile, en toute simplicité.</h1>
+                <p class="hero-description">
+                    Découvrez une sélection premium de véhicules disponibles à l’achat
+                    ou en LLD, avec un accompagnement personnalisé.
+                </p>
+
+                <div class="hero-actions">
+                    <a th:href="@{/vehicules}" class="btn-primary hero-btn">Voir nos véhicules</a>
+                    <a th:href="@{/services}" class="btn-outline">Découvrir nos services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECHERCHE -->
+    <section class="search-section reveal">
+        <div class="container">
+            <h2>Rechercher un véhicule</h2>
+
+            <form th:action="@{/vehicules}" method="get" class="search-form">
+                <input type="text" name="marque" placeholder="Marque, modèle...">
+
+                <select name="typeOffre">
+                    <option value="">Type d'offre</option>
+                    <option value="LLD">LLD</option>
+                    <option value="ACHAT">Achat</option>
+                </select>
+
+                <input type="number" name="budgetMax" placeholder="Budget max €">
+
+                <button type="submit">Rechercher</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- VITRINE VEHICULES -->
+    <section class="home-showcase container reveal">
+        <div class="section-heading">
+            <h2>Nos véhicules à découvrir</h2>
+            <p>
+                Une sélection premium de modèles disponibles à l’achat ou en location longue durée.
+            </p>
+        </div>
+
+        <div class="home-vehicle-grid">
+            <a th:href="@{/vehicules}" class="home-vehicle-card">
+                <img th:src="@{/img/bmw.jpg}" alt="BMW Série 5">
+                <div class="home-vehicle-content">
+                    <h3>BMW Série 5</h3>
+                    <p>Berline premium, élégance et confort pour vos trajets du quotidien.</p>
+                    <span class="home-vehicle-link">Cliquer pour en savoir plus</span>
+                </div>
+            </a>
+
+            <a th:href="@{/vehicules}" class="home-vehicle-card">
+                <img th:src="@{/img/audiq5.jpg}" alt="Audi Q5 S-Line">
+                <div class="home-vehicle-content">
+                    <h3>Audi Q5 S-Line</h3>
+                    <p>Un SUV raffiné, technologique et parfaitement adapté à la famille.</p>
+                    <span class="home-vehicle-link">Cliquer pour en savoir plus</span>
+                </div>
+            </a>
+
+            <a th:href="@{/vehicules}" class="home-vehicle-card">
+                <img th:src="@{/img/porsche.jpg}" alt="Porsche Macan GTS">
+                <div class="home-vehicle-content">
+                    <h3>Porsche Macan GTS</h3>
+                    <p>Un SUV sportif au caractère affirmé, pour une conduite d’exception.</p>
+                    <span class="home-vehicle-link">Cliquer pour en savoir plus</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="home-showcase-action">
+            <a th:href="@{/vehicules}" class="btn-primary">Voir tous les véhicules</a>
+            <a th:href="@{/inscription}" class="btn-outline-dark">Créer un compte</a>
+        </div>
+    </section>
+
+    <!-- AVANTAGES -->
+    <section class="home-benefits container reveal">
+        <div class="section-heading">
+            <h2>Pourquoi choisir M-Motors ?</h2>
+            <p>Une expérience premium pensée pour l’achat comme pour la location longue durée.</p>
+        </div>
+
+        <div class="home-benefits-grid">
+            <div class="benefit-card">
+                <h3>Sélection premium</h3>
+                <p>Des véhicules soigneusement sélectionnés pour leur qualité, leur fiabilité et leur élégance.</p>
+            </div>
+
+            <div class="benefit-card">
+                <h3>Achat & LLD</h3>
+                <p>Deux solutions pour répondre à vos besoins, votre usage et votre budget.</p>
+            </div>
+
+            <div class="benefit-card">
+                <h3>Dossier 100% en ligne</h3>
+                <p>Inscription, dépôt des documents et suivi de dossier directement depuis votre espace personnel.</p>
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+
+        function revealOnScroll() {
+            const windowHeight = window.innerHeight;
+
+            reveals.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const visiblePoint = 100;
+
+                if (elementTop < windowHeight - visiblePoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    </script>
+
 </body>
 </html>

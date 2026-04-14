@@ -2,72 +2,91 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des véhicules</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Véhicules - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Recherche de véhicules</h1>
 
-<form th:action="@{/vehicules}" method="get">
-    <div>
-        <label for="marque">Marque :</label>
-        <input type="text" id="marque" name="marque" th:value="${marque}">
-    </div>
+    <div th:replace="~{fragments/header :: header}"></div>
 
-    <div>
-        <label for="modele">Modèle :</label>
-        <input type="text" id="modele" name="modele" th:value="${modele}">
-    </div>
+    <main>
+        <div class="container">
+            <h1 class="page-title">Recherche de véhicules</h1>
 
-    <div>
-        <label for="typeOffre">Type d'offre :</label>
-        <select id="typeOffre" name="typeOffre">
-            <option value="">Tous</option>
-            <option value="ACHAT" th:selected="${typeOffre != null and typeOffre.name() == 'ACHAT'}">Achat</option>
-            <option value="LLD" th:selected="${typeOffre != null and typeOffre.name() == 'LLD'}">LLD</option>
-        </select>
-    </div>
+            <div class="vehicules-page">
+                <!-- FILTRES -->
+                <aside class="vehicule-filters">
+                    <h2>Filtres</h2>
 
-    <button type="submit">Rechercher</button>
-</form>
+                    <form th:action="@{/vehicules}" method="get">
+                        <div class="form-group">
+                            <label for="marque">Marque</label>
+                            <input type="text" id="marque" name="marque" th:value="${marque}">
+                        </div>
 
-<hr>
+                        <div class="form-group">
+                            <label for="modele">Modèle</label>
+                            <input type="text" id="modele" name="modele" th:value="${modele}">
+                        </div>
 
-<div th:if="${vehicules == null or vehicules.isEmpty()}">
-    <p>Aucun véhicule trouvé.</p>
-</div>
+                        <div class="form-group">
+                            <label for="typeOffre">Type d'offre</label>
+                            <select id="typeOffre" name="typeOffre">
+                                <option value="">Tous</option>
+                                <option value="ACHAT" th:selected="${typeOffre != null and typeOffre.name() == 'ACHAT'}">Achat</option>
+                                <option value="LLD" th:selected="${typeOffre != null and typeOffre.name() == 'LLD'}">LLD</option>
+                            </select>
+                        </div>
 
-<div th:if="${vehicules != null and !vehicules.isEmpty()}">
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Marque</th>
-            <th>Modèle</th>
-            <th>Année</th>
-            <th>Kilométrage</th>
-            <th>Prix achat</th>
-            <th>Loyer mensuel</th>
-            <th>Type d'offre</th>
-            <th>Détail</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="vehicule : ${vehicules}">
-            <td th:text="${vehicule.id}"></td>
-            <td th:text="${vehicule.marque}"></td>
-            <td th:text="${vehicule.modele}"></td>
-            <td th:text="${vehicule.annee}"></td>
-            <td th:text="${vehicule.kilometrage}"></td>
-            <td th:text="${vehicule.prixAchat}"></td>
-            <td th:text="${vehicule.loyerMensuel}"></td>
-            <td th:text="${vehicule.typeOffre}"></td>
-            <td>
-                <a th:href="@{/vehicules/{id}(id=${vehicule.id})}">Voir</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+                        <button type="submit" class="btn-primary">Rechercher</button>
+                    </form>
+                </aside>
+
+                <!-- LISTE -->
+                <section class="vehicule-list">
+                    <div th:if="${vehicules == null or vehicules.isEmpty()}">
+                        <p>Aucun véhicule trouvé.</p>
+                    </div>
+
+                    <div class="vehicule-card" th:each="vehicule : ${vehicules}">
+                        <img class="vehicule-card-img"
+                             th:src="${vehicule.photoUrl}"
+                             alt="Photo du véhicule">
+
+                        <div class="vehicule-card-content">
+                            <h3 th:text="${vehicule.marque + ' ' + vehicule.modele}">Nom du véhicule</h3>
+
+                            <p class="vehicule-card-desc"
+                               th:text="${vehicule.description}">
+                                Description du véhicule
+                            </p>
+
+                            <div class="vehicule-specs">
+                                <span th:text="${vehicule.annee} + ' • ' + ${vehicule.kilometrage} + ' km'">Année • Kilométrage</span>
+                            </div>
+
+                            <div class="vehicule-pricing">
+                                <div class="price-option">
+                                    <span class="price-label">Achat</span>
+                                    <span class="price-value" th:text="${vehicule.prixAchat} + ' €'">0 €</span>
+                                </div>
+
+                                <div class="price-option">
+                                    <span class="price-label">LLD</span>
+                                    <span class="price-value" th:text="${vehicule.loyerMensuel} + ' €/mois'">0 €/mois</span>
+                                </div>
+                            </div>
+
+                            <a th:href="@{/vehicules/{id}(id=${vehicule.id})}" class="btn-secondary">Voir le détail</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>

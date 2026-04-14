@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="header">
+        <header>
+            <nav>
+                <a th:href="@{/}" class="logo">
+                    <img th:src="@{/img/logo.png}" alt="Logo M-Motors" class="header-logo">
+                </a>
+
+                <div class="nav-links">
+                    <a th:href="@{/vehicules}">Véhicules</a>
+                    <a th:href="@{/services}">Services</a>
+                    <a th:href="@{/contact}">Contact</a>
+                </div>
+
+                <div class="auth-buttons">
+                    <a th:href="@{/login}" class="btn-login">Se connecter</a>
+                    <a th:href="@{/inscription}" class="btn-register">S'inscrire</a>
+                </div>
+            </nav>
+        </header>
+    </div>
+</body>
+</html>
