@@ -13,12 +13,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-
-    public WebSecurityConfig(CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
-        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -53,7 +47,7 @@ public class WebSecurityConfig {
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .successHandler(customAuthenticationSuccessHandler)
+                .defaultSuccessUrl("/", true)
                 .permitAll()
             )
             .logout(logout -> logout
