@@ -1,9 +1,8 @@
-package com.m_motors.mmotors.service;
+package com.m_motors.mmotors.service.impl;
 
 import com.m_motors.mmotors.model.Dossier;
 import com.m_motors.mmotors.model.StatutDossier;
 import com.m_motors.mmotors.repository.DossierRepository;
-import com.m_motors.mmotors.service.impl.DossierServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +12,10 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class DossierServiceTest {
+class DossierServiceImplTest {
 
     private DossierRepository dossierRepository;
-    private DossierService dossierService;
+    private DossierServiceImpl dossierService;
 
     @BeforeEach
     void setUp() {

@@ -22,20 +22,13 @@ public class Vehicle {
     private String modele;
     private Integer annee;
     private Integer kilometrage;
-    private String description;
 
     private Double prixAchat;
     private Double loyerMensuel;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TypeOffre typeOffre;
 
+    private String description;
     private String photoUrl;
-
-    // Options incluses
-    private Boolean assuranceIncluse;
-    private Boolean assistanceIncluse;
-    private Boolean entretienInclu;
-    private Boolean controleTechniqueInclus;
 }

@@ -35,19 +35,25 @@ public class DossierController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/dossiers")
-    public String mesDossiers(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        String email = userDetails.getUsername();
+ @GetMapping("/dossiers")
+public String mesDossiers(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    String email = userDetails.getUsername();
 
-        User user = userService.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + email));
+    var userOpt = userService.findByEmail(email);
 
-        List<Dossier> dossiers = dossierRepository.findByClientId(user.getId());
-
-        model.addAttribute("dossiers", dossiers);
+    if (userOpt.isEmpty()) {
+        model.addAttribute("dossiers", List.of());
         model.addAttribute("title", "Mes Dossiers - M-Motors");
         return "client/dossiers";
     }
+
+    User user = userOpt.get();
+    List<Dossier> dossiers = dossierRepository.findByClientId(user.getId());
+
+    model.addAttribute("dossiers", dossiers);
+    model.addAttribute("title", "Mes Dossiers - M-Motors");
+    return "client/dossiers";
+}
 
     @GetMapping("/dossiers/nouveau")
     public String nouveauDossier(Model model) {

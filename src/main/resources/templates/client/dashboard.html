@@ -12,7 +12,10 @@
     <main>
         <div class="container">
             <h1>Bienvenue dans votre espace client</h1>
-            <p>Bonjour <span th:text="${#authentication.principal.prenom} + ' ' + ${#authentication.principal.nom}">utilisateur</span> !</p>
+            <p>
+                Bonjour
+                <span th:text="${#authentication != null ? #authentication.name : 'utilisateur'}">utilisateur</span> !
+            </p>
 
             <div class="dashboard-menu">
                 <h2>Que souhaitez-vous faire ?</h2>

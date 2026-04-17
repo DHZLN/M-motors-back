@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail dossier - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="admin-header">
+    <nav>
+        <a th:href="@{/admin/dashboard}">Tableau de Bord</a>
+        <a th:href="@{/admin/dossiers}">Retour aux dossiers</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button type="submit">Déconnexion</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1>Détail du dossier</h1>
+
+        <p><strong>ID :</strong> <span th:text="${dossier.id}">1</span></p>
+        <p><strong>Client :</strong> <span th:text="${dossier.client != null ? dossier.client.email : 'N/A'}">client@test.com</span></p>
+        <p><strong>Véhicule :</strong>
+            <span th:text="${dossier.vehicule != null ? dossier.vehicule.marque + ' ' + dossier.vehicule.modele : 'N/A'}">Audi Q5</span>
+        </p>
+        <p><strong>Type d'offre :</strong> <span th:text="${dossier.typeOffre}">LLD</span></p>
+        <p><strong>Statut actuel :</strong> <span th:text="${dossier.statut}">EN_ATTENTE_DOCUMENTS</span></p>
+
+        <h2>Changer le statut</h2>
+
+        <form th:action="@{/admin/dossiers/{id}/statut(id=${dossier.id})}" method="post">
+            <label for="statut">Nouveau statut :</label>
+            <select id="statut" name="statut">
+                <option th:each="statut : ${statuts}"
+                        th:value="${statut.name()}"
+                        th:text="${statut.name()}"
+                        th:selected="${statut == dossier.statut}">
+                </option>
+            </select>
+
+            <button type="submit">Mettre à jour</button>
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

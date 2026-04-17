@@ -1,66 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Gérer les Dossiers - Admin</title>
+    <title>Gestion des dossiers - M-Motors</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header class="admin-header">
-        <nav>
-            <a th:href="@{/admin/dashboard}">Tableau de Bord</a>
-            <a th:href="@{/admin/dossiers}">Gérer les Dossiers</a>
-            <a th:href="@{/admin/vehicules}">Gérer les Véhicules</a>
-            <a th:href="@{/admin/utilisateurs}">Gérer les Utilisateurs</a>
-            <form th:action="@{/logout}" method="post" style="display: inline;">
-                <button type="submit">Déconnexion</button>
-            </form>
-        </nav>
-    </header>
-    <main>
-        <div class="container">
-            <h1>Gestion des Dossiers Clients</h1>
-            <p>Liste et statut de tous les dossiers de demande d'achat/location.</p>
 
-            <!-- Ici, tu afficheras la liste des dossiers, par exemple dans un tableau -->
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID Dossier</th>
-                            <th>Client</th>
-                            <th>Véhicule</th>
-                            <th>Type de Demande</th>
-                            <th>Statut</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Exemple de ligne (à remplacer par une boucle th:each) -->
-                        <tr>
-                            <td>#001</td>
-                            <td>John Doe</td>
-                            <td>BMW Série 5</td>
-                            <td>Achat</td>
-                            <td>En attente</td>
-                            <td><a href="#" class="btn-primary btn-sm">Voir</a></td>
-                        </tr>
-                        <tr>
-                            <td>#002</td>
-                            <td>Jane Smith</td>
-                            <td>Audi Q5</td>
-                            <td>LLD</td>
-                            <td>Validé</td>
-                            <td><a href="#" class="btn-primary btn-sm">Voir</a></td>
-                        </tr>
-                        <!-- Fin de l'exemple -->
-                    </tbody>
-                </table>
-            </div>
+<header class="admin-header">
+    <nav>
+        <a th:href="@{/admin/dashboard}">Tableau de Bord</a>
+        <a th:href="@{/admin/dossiers}">Gérer les Dossiers</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button type="submit">Déconnexion</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1>Gestion des dossiers</h1>
+
+        <div th:if="${dossiers == null or dossiers.isEmpty()}">
+            <p>Aucun dossier trouvé.</p>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2026 M-Motors. Tous droits réservés.</p>
-    </footer>
+
+        <table th:if="${dossiers != null and !dossiers.isEmpty()}" border="1" cellpadding="8">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Client</th>
+                <th>Véhicule</th>
+                <th>Type d'offre</th>
+                <th>Statut</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dossier : ${dossiers}">
+                <td th:text="${dossier.id}">1</td>
+                <td th:text="${dossier.client != null ? dossier.client.email : 'N/A'}">client@test.com</td>
+                <td th:text="${dossier.vehicule != null ? dossier.vehicule.marque + ' ' + dossier.vehicule.modele : 'N/A'}">Audi Q5</td>
+                <td th:text="${dossier.typeOffre}">LLD</td>
+                <td th:text="${dossier.statut}">EN_ATTENTE_DOCUMENTS</td>
+                <td>
+                    <a th:href="@{/admin/dossiers/{id}(id=${dossier.id})}">Voir le détail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
 </body>
 </html>

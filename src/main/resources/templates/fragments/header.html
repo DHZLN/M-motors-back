@@ -15,20 +15,19 @@
                 <a th:href="@{/contact}">Contact</a>
             </div>
 
-            <!-- Utilisateur NON connecté -->
             <div class="auth-buttons" sec:authorize="isAnonymous()">
                 <a th:href="@{/login}" class="btn-login">Se connecter</a>
                 <a th:href="@{/inscription}" class="btn-register">S'inscrire</a>
             </div>
 
-            <!-- Utilisateur connecté -->
             <div class="user-menu" sec:authorize="isAuthenticated()">
                 <div class="user-badge">
                     <span class="user-avatar"
-                          th:text="${#strings.substring(#authentication.name,0,1).toUpperCase()}">U</span>
+                          th:text="${#authentication != null ? #strings.substring(#authentication.name,0,1).toUpperCase() : 'U'}">U</span>
 
                     <div class="user-dropdown">
-                        <span class="user-name" th:text="${#authentication.name}">utilisateur@email.com</span>
+                        <span class="user-name"
+                              th:text="${#authentication != null ? #authentication.name : 'utilisateur@email.com'}">utilisateur@email.com</span>
 
                         <a th:href="@{/client/dashboard}" sec:authorize="hasRole('CLIENT')">Mon espace client</a>
                         <a th:href="@{/dossiers}" sec:authorize="hasRole('CLIENT')">Mes dossiers</a>
@@ -36,7 +35,9 @@
                         <a th:href="@{/admin/dashboard}" sec:authorize="hasRole('ADMIN')">Dashboard admin</a>
                         <a th:href="@{/admin/dossiers}" sec:authorize="hasRole('ADMIN')">Gérer les dossiers</a>
 
-                        <a th:href="@{/logout}">Déconnexion</a>
+                        <form th:action="@{/logout}" method="post" style="display:inline;">
+                            <button type="submit" class="logout-link">Déconnexion</button>
+                        </form>
                     </div>
                 </div>
             </div>

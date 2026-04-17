@@ -15,7 +15,6 @@
             <h1 class="page-title">Recherche de véhicules</h1>
 
             <div class="vehicules-page">
-                <!-- FILTRES -->
                 <aside class="vehicule-filters">
                     <h2>Filtres</h2>
 
@@ -35,7 +34,7 @@
                             <select id="typeOffre" name="typeOffre">
                                 <option value="">Tous</option>
                                 <option value="ACHAT" th:selected="${typeOffre != null and typeOffre.name() == 'ACHAT'}">Achat</option>
-                                <option value="LLD" th:selected="${typeOffre != null and typeOffre.name() == 'LLD'}">LLD</option>
+<option value="LLD" th:selected="${typeOffre != null and typeOffre.name() == 'LLD'}">LLD</option>
                             </select>
                         </div>
 
@@ -43,7 +42,6 @@
                     </form>
                 </aside>
 
-                <!-- LISTE -->
                 <section class="vehicule-list">
                     <div th:if="${vehicules == null or vehicules.isEmpty()}">
                         <p>Aucun véhicule trouvé.</p>
@@ -63,7 +61,7 @@
                             </p>
 
                             <div class="vehicule-specs">
-                                <span th:text="${vehicule.annee} + ' • ' + ${vehicule.kilometrage} + ' km'">Année • Kilométrage</span>
+                                <span th:text="${vehicule.annee + ' • ' + vehicule.kilometrage + ' km'}">Année • Kilométrage</span>
                             </div>
 
                             <div class="vehicule-pricing">

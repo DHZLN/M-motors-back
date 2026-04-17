@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "dossiers")
@@ -22,30 +21,18 @@ public class Dossier {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
+    @JoinColumn(name = "client_id")
     private User client;
 
     @ManyToOne
-    @JoinColumn(name = "vehicule_id", nullable = false)
+    @JoinColumn(name = "vehicule_id")
     private Vehicle vehicule;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TypeOffre typeOffre; // ACHAT ou LLD
+    private TypeOffre typeOffre;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatutDossier statut; // EN_ATTENTE_DOCUMENTS, EN_COURS_ANALYSE, ACCEPTE, REFUSE
+    private StatutDossier statut;
 
     private LocalDateTime dateCreation;
-    private LocalDateTime dateDerniereMiseajour;
-
-    // Options sélectionnées
-    private Boolean assuranceTousRisques;
-    private Boolean assistanceDepannage;
-    private Boolean entretienEtSav;
-    private Boolean controleTechniqueInclus;
-
-    @OneToMany(mappedBy = "dossier", cascade = CascadeType.ALL)
-    private List<Document> documents;
 }

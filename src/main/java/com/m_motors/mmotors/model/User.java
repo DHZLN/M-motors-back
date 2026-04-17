@@ -1,7 +1,10 @@
 package com.m_motors.mmotors.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
@@ -15,10 +18,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String prenom;
 
-    @Column(nullable = false)
     private String nom;
 
     @Column(nullable = false, unique = true)
@@ -28,11 +29,8 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @Builder.Default
-    private Role role = Role.CLIENT;
+    private Role role;
 
-    @Column(nullable = false)
     @Builder.Default
     private boolean enabled = true;
 }

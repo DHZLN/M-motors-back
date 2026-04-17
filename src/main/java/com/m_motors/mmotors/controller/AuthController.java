@@ -1,5 +1,6 @@
 package com.m_motors.mmotors.controller;
 
+import com.m_motors.mmotors.model.User;
 import com.m_motors.mmotors.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,17 +17,32 @@ public class AuthController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "auth/login";
+        return "login";
     }
 
     @GetMapping("/inscription")
-    public String showInscriptionPage() {
-        return "auth/inscription";
+    public String showInscriptionPage(Model model) {
+        model.addAttribute("user", new User());
+        return "inscription";
+    }
+    @GetMapping("/client/dashboard")
+public String clientDashboard(Model model) {
+    model.addAttribute("title", "Mon Espace Client");
+    return "client/dashboard";
+}
+
+    @GetMapping("/register")
+    public String showRegisterPage(Model model) {
+        model.addAttribute("user", new User());
+        return "inscription";
     }
 
-    /**
-     * Traite le formulaire d'inscription
-     */
+    @GetMapping("/formulaire-inscription")
+public String showFormulaireInscriptionPage(Model model) {
+    model.addAttribute("user", new User());
+    return "inscription";
+}
+
     @PostMapping("/register")
     public String registerUser(
             @RequestParam("prenom") String prenom,
@@ -36,7 +52,6 @@ public class AuthController {
             @RequestParam("confirmPassword") String confirmPassword,
             Model model
     ) {
-        // Vérifier que les mots de passe correspondent
         if (!password.equals(confirmPassword)) {
             return "redirect:/inscription?error=password_mismatch";
         }
@@ -47,14 +62,5 @@ public class AuthController {
         } catch (Exception e) {
             return "redirect:/inscription?error=email_exists";
         }
-    }
-
-    /**
-     * Page dashboard client (accessible après connexion)
-     */
-    @GetMapping("/client/dashboard")
-    public String clientDashboard(Model model) {
-        model.addAttribute("title", "Mon Espace Client - M-Motors");
-        return "client/dashboard";
     }
 }
