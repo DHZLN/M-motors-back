@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation dossier</title>
+</head>
+<body>
+<h1>Confirmation</h1>
+
+<p th:text="${success}"></p>
+<p>ID dossier : <span th:text="${dossier.id}"></span></p>
+
+<p><a th:href="@{/vehicules}">Retour aux véhicules</a></p>
+</body>
+</html>

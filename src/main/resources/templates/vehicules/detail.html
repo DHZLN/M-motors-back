@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail du véhicule</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Détail du véhicule</h1>
+
+<div th:if="${vehicule != null}">
+    <p><strong>Marque :</strong> <span th:text="${vehicule.marque}"></span></p>
+    <p><strong>Modèle :</strong> <span th:text="${vehicule.modele}"></span></p>
+    <p><strong>Année :</strong> <span th:text="${vehicule.annee}"></span></p>
+    <p><strong>Kilométrage :</strong> <span th:text="${vehicule.kilometrage}"></span></p>
+
+    <p><strong>Type d'offre :</strong> <span th:text="${vehicule.typeOffre}"></span></p>
+
+    <!-- Affichage conditionnel prix / loyer -->
+   <div th:if="${vehicule.typeOffre != null and vehicule.typeOffre.name() == 'ACHAT'}">
+        <p><strong>Prix achat :</strong> <span th:text="${vehicule.prixAchat}"></span> €</p>
+    </div>
+
+   <div th:if="${vehicule.typeOffre != null and vehicule.typeOffre.name() == 'LLD'}">
+        <p><strong>Loyer mensuel :</strong> <span th:text="${vehicule.loyerMensuel}"></span> €</p>
+    </div>
+
+    <p><strong>Description :</strong> <span th:text="${vehicule.description}"></span></p>
+
+    <hr>
+
+    <!-- Bouton dépôt de dossier -->
+    <div>
+        <a th:href="@{/dossiers/creer/{id}(id=${vehicule.id})}">
+            <button>📄 Déposer un dossier</button>
+        </a>
+    </div>
+</div>
+
+<!-- Cas où véhicule null -->
+<div th:if="${vehicule == null}">
+    <p>Véhicule introuvable.</p>
+</div>
+
+<hr>
+
+<p>
+    <a th:href="@{/vehicules}">⬅ Retour à la liste</a>
+</p>
+
+</body>
+</html>

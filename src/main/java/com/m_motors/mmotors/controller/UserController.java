@@ -1,28 +1,25 @@
-package com.mmotors.app.controller;
+package com.m_motors.mmotors.controller;
 
-import com.mmotors.app.model.User;
-import com.mmotors.app.service.UserService;
-import org.springframework.web.bind.annotation.*;
+import com.m_motors.mmotors.model.User;
+import com.m_motors.mmotors.service.UserService;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/users")
-public class UserController {
-
+public class UserController { // Pas @Controller pour l'instant
     private final UserService userService;
 
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getUsers(){
-        return userService.getAllUsers();
+    public String showRegistrationForm() {
+        return "inscription";
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user){
-        return userService.saveUser(user);
+    public String registerUser(User user) {
+       userService.registerUser(user.getPrenom(), user.getNom(), user.getEmail(), user.getPassword()); // CORRECT
+        return "inscription-success"; // Ou redirection vers connexion
+    }
+
+    public String showLoginForm() {
+        return "connexion";
     }
 }

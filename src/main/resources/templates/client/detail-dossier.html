@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+      lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Détail Dossier - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Header -->
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main>
+        <div class="container">
+            <h1>Dossier #<span th:text="${dossier.id}"></span></h1>
+
+            <div class="dossier-actions">
+                <a th:href="@{/dossiers}" class="btn-secondary">Retour à mes dossiers</a>
+            </div>
+
+            <div class="detail-card">
+                <h2>Informations générales</h2>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <strong>Statut :</strong>
+                        <span th:class="${'statut-' + #strings.toLowerCase(dossier.statut)}"
+                              th:text="${dossier.statut}"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Type d'offre :</strong>
+                        <span th:text="${dossier.typeOffre}"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Date de création :</strong>
+                        <span th:text="${#temporals.format(dossier.dateCreation, 'dd/MM/yyyy HH:mm')}"></span>
+                    </div>
+                </div>
+
+                <h2>Véhicule concerné</h2>
+                <div th:if="${dossier.vehicule != null}" class="vehicule-info">
+                    <p><strong>Marque :</strong> <span th:text="${dossier.vehicule.marque}"></span></p>
+                    <p><strong>Modèle :</strong> <span th:text="${dossier.vehicule.modele}"></span></p>
+                    <p><strong>Prix :</strong> <span th:text="${dossier.vehicule.prixAchat + ' €'}"></span></p>
+                </div>
+                <p th:unless="${dossier.vehicule != null}">Aucun véhicule associé</p>
+
+                <h2>Historique</h2>
+                <p>L'historique des modifications sera affiché ici.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

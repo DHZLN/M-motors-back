@@ -1,29 +1,11 @@
-package com.mmotors.app.service;
+package com.m_motors.mmotors.service;
 
-import com.mmotors.app.model.User;
-import com.mmotors.app.repository.UserRepository;
-import org.springframework.stereotype.Service;
+import com.m_motors.mmotors.model.User;
+import java.util.Optional;
 
-import java.util.List;
-
-@Service
-public class UserService {
-
-    private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public User saveUser(User user){
-        return userRepository.save(user);
-    }
-
-    public User findByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
+public interface UserService {
+    User registerUser(String prenom, String nom, String email, String password); // La méthode que tu utilises pour l'inscription
+    Optional<User> findByEmail(String email);
+    User save(User user); // Pour sauvegarder un utilisateur existant ou créé manuellement
+    // Ajoutez d'autres méthodes si nécessaire
 }

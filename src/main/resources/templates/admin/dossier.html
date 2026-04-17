@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des dossiers - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="admin-header">
+    <nav>
+        <a th:href="@{/admin/dashboard}">Tableau de Bord</a>
+        <a th:href="@{/admin/dossiers}">Gérer les Dossiers</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button type="submit">Déconnexion</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1>Gestion des dossiers</h1>
+
+        <div th:if="${dossiers == null or dossiers.isEmpty()}">
+            <p>Aucun dossier trouvé.</p>
+        </div>
+
+        <table th:if="${dossiers != null and !dossiers.isEmpty()}" border="1" cellpadding="8">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Client</th>
+                <th>Véhicule</th>
+                <th>Type d'offre</th>
+                <th>Statut</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dossier : ${dossiers}">
+                <td th:text="${dossier.id}">1</td>
+                <td th:text="${dossier.client != null ? dossier.client.email : 'N/A'}">client@test.com</td>
+                <td th:text="${dossier.vehicule != null ? dossier.vehicule.marque + ' ' + dossier.vehicule.modele : 'N/A'}">Audi Q5</td>
+                <td th:text="${dossier.typeOffre}">LLD</td>
+                <td th:text="${dossier.statut}">EN_ATTENTE_DOCUMENTS</td>
+                <td>
+                    <a th:href="@{/admin/dossiers/{id}(id=${dossier.id})}">Voir le détail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

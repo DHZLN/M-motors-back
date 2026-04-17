@@ -1,33 +1,18 @@
-package com.mmotors.app.service;
+package com.m_motors.mmotors.service;
 
-import com.mmotors.app.model.Vehicle;
-import com.mmotors.app.repository.VehicleRepository;
-import org.springframework.stereotype.Service;
-
+import com.m_motors.mmotors.model.TypeOffre;
+import com.m_motors.mmotors.model.Vehicle;
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class VehicleService {
-
-    private final VehicleRepository vehicleRepository;
-
-    public VehicleService(VehicleRepository vehicleRepository){
-        this.vehicleRepository = vehicleRepository;
-    }
-
-    public List<Vehicle> getAllVehicles() {
-        return vehicleRepository.findAll();
-    }
-
-    public Vehicle saveVehicle(Vehicle vehicle){
-        return vehicleRepository.save(vehicle);
-    }
-
-    public Vehicle getVehicleById(Long id){
-        return vehicleRepository.findById(id).orElse(null);
-    }
-
-    public void deleteVehicle(Long id){
-        vehicleRepository.deleteById(id);
-    }
+public interface VehicleService {
+    List<Vehicle> getAllVehicules();
+    Optional<Vehicle> getVehiculeById(Long id); // Utilisez Long pour les IDs
+    Vehicle saveVehicule(Vehicle vehicle);
+    void deleteVehicule(Long id);
+    
+    List<Vehicle> rechercherVehicules(String marque, String modele, TypeOffre typeOffre);
+    // Ajoutez d'autres variantes de rechercherVehicules si nécessaire, par exemple:
+    // List<Vehicle> rechercherVehicules(String marque, String modele);
+    // List<Vehicle> rechercherVehicules(String marque);
 }

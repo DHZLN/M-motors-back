@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer un dossier</title>
+</head>
+<body>
+<h1>Créer un dossier</h1>
+
+<p>Véhicule sélectionné : <strong th:text="${vehicule.marque + ' ' + vehicule.modele}"></strong></p>
+<p>Type d'offre : <strong th:text="${vehicule.typeOffre}"></strong></p>
+
+<form th:action="@{/dossiers/creer}" th:object="${dossier}" method="post">
+    <input type="hidden" th:field="*{vehicule.id}" />
+
+    <div th:if="${vehicule.typeOffre.name() == 'LLD'}">
+        <label>
+            <input type="checkbox" th:field="*{assuranceTousRisques}" />
+            Assurance tous risques
+        </label><br>
+
+        <label>
+            <input type="checkbox" th:field="*{assistanceDepannage}" />
+            Assistance dépannage
+        </label><br>
+
+        <label>
+            <input type="checkbox" th:field="*{entretienEtSav}" />
+            Entretien et SAV
+        </label><br>
+
+        <label>
+            <input type="checkbox" th:field="*{controleTechniqueInclus}" />
+            Contrôle technique
+        </label><br>
+    </div>
+
+    <button type="submit">Valider le dossier</button>
+</form>
+
+<p><a th:href="@{/vehicules/{id}(id=${vehicule.id})}">Retour au véhicule</a></p>
+</body>
+</html>

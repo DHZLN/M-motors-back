@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero no-image">
+            <div class="hero-content">
+                <h1>L'excellence automobile, en toute simplicité.</h1>
+            </div>
+        </section>
+
+        <!-- RECHERCHE -->
+        <section class="search-section">
+            <h2>Rechercher un véhicule</h2>
+
+            <form th:action="@{/vehicules}" method="get" class="search-form">
+                <div class="form-group">
+                    <input type="text" name="marque" placeholder="Marque, modèle...">
+                </div>
+
+                <div class="form-group">
+                    <select name="typeOffre">
+                        <option value="">Type d'offre</option>
+                        <option value="ACHAT">Achat</option>
+                        <option value="LLD">LLD</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="number" name="budgetMax" placeholder="Budget max €">
+                </div>
+
+                <button type="submit">Rechercher</button>
+            </form>
+        </section>
+
+        <!-- SELECTION PREMIUM -->
+        <section class="premium-selection container">
+            <h2>Notre sélection premium</h2>
+
+            <div class="premium-grid">
+                <!-- Carte 1 -->
+                <div class="car-card no-image">
+                    <div class="car-card-content">
+                        <h3>Porsche 911 Carrera</h3>
+                        <p class="car-subtitle">Modèle premium</p>
+
+                        <div class="car-pricing">
+                            <div class="price-left">
+                                <span class="price-main">120 000 €</span>
+                                <span class="price-label">TTC</span>
+                            </div>
+
+                            <div class="price-right">
+                                <span class="price-from">dès</span>
+                                <span class="price-month">990 €</span>
+                                <span class="price-period">/mois</span>
+                            </div>
+                        </div>
+
+                        <a th:href="@{/vehicules}" class="btn-primary">Voir les détails</a>
+                    </div>
+                </div>
+
+                <!-- Carte 2 -->
+                <div class="car-card no-image">
+                    <div class="car-card-content">
+                        <h3>Audi RS Q8</h3>
+                        <p class="car-subtitle">SUV performance</p>
+
+                        <div class="car-pricing">
+                            <div class="price-left">
+                                <span class="price-main">160 000 €</span>
+                                <span class="price-label">TTC</span>
+                            </div>
+
+                            <div class="price-right">
+                                <span class="price-from">dès</span>
+                                <span class="price-month">1 290 €</span>
+                                <span class="price-period">/mois</span>
+                            </div>
+                        </div>
+
+                        <a th:href="@{/vehicules}" class="btn-primary">Voir les détails</a>
+                    </div>
+                </div>
+
+                <!-- Carte 3 -->
+                <div class="car-card no-image">
+                    <div class="car-card-content">
+                        <h3>Mercedes AMG GT</h3>
+                        <p class="car-subtitle">Berline de luxe</p>
+
+                        <div class="car-pricing">
+                            <div class="price-left">
+                                <span class="price-main">145 000 €</span>
+                                <span class="price-label">TTC</span>
+                            </div>
+
+                            <div class="price-right">
+                                <span class="price-from">dès</span>
+                                <span class="price-month">1 090 €</span>
+                                <span class="price-period">/mois</span>
+                            </div>
+                        </div>
+
+                        <a th:href="@{/vehicules}" class="btn-primary">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

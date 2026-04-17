@@ -1,9 +1,13 @@
-package com.mmotors.app.model;
+package com.m_motors.mmotors.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "vehicles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,8 +18,17 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String brand;
-    private String model;
-    private int year;
-    private double price;
+    private String marque;
+    private String modele;
+    private Integer annee;
+    private Integer kilometrage;
+
+    private Double prixAchat;
+    private Double loyerMensuel;
+
+    @Enumerated(EnumType.STRING)
+    private TypeOffre typeOffre;
+
+    private String description;
+    private String photoUrl;
 }

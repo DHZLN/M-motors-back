@@ -1,38 +1,91 @@
-package com.mmotors.app.controller;
+package com.m_motors.mmotors.controller;
 
-import com.mmotors.app.model.Vehicle;
-import com.mmotors.app.service.VehicleService;
-import org.springframework.web.bind.annotation.*;
+import com.m_motors.mmotors.model.TypeOffre;
+import com.m_motors.mmotors.model.Vehicle;
+import com.m_motors.mmotors.repository.VehicleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/vehicles")
+@Controller
 public class VehicleController {
 
-    private final VehicleService vehicleService;
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
-    public VehicleController(VehicleService vehicleService){
-        this.vehicleService = vehicleService;
+ @GetMapping("/vehicules")
+public String listVehicles(
+        @RequestParam(value = "marque", required = false) String marque,
+        @RequestParam(value = "modele", required = false) String modele,
+        @RequestParam(value = "typeOffre", required = false) String typeOffre,
+        @RequestParam(value = "budgetMax", required = false) Double budgetMax,
+        Model model) {
+
+    List<Vehicle> vehicules = vehicleRepository.findAll();
+
+    if (marque != null && !marque.isBlank()) {
+        String marqueLower = marque.toLowerCase();
+        vehicules = vehicules.stream()
+                .filter(v -> v.getMarque() != null && v.getMarque().toLowerCase().contains(marqueLower))
+                .collect(Collectors.toList());
     }
 
-    @GetMapping
-    public List<Vehicle> getVehicles(){
-        return vehicleService.getAllVehicles();
+    if (modele != null && !modele.isBlank()) {
+        String modeleLower = modele.toLowerCase();
+        vehicules = vehicules.stream()
+                .filter(v -> v.getModele() != null && v.getModele().toLowerCase().contains(modeleLower))
+                .collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
-    public Vehicle getVehicleById(@PathVariable Long id){
-        return vehicleService.getVehicleById(id);
+    TypeOffre typeOffreEnum = null;
+    if (typeOffre != null && !typeOffre.isBlank()) {
+        try {
+            typeOffreEnum = TypeOffre.valueOf(typeOffre);
+
+            TypeOffre finalTypeOffreEnum = typeOffreEnum;
+            vehicules = vehicules.stream()
+                    .filter(v -> (finalTypeOffreEnum == TypeOffre.ACHAT && v.getPrixAchat() != null)
+                            || (finalTypeOffreEnum == TypeOffre.LLD && v.getLoyerMensuel() != null))
+                    .collect(Collectors.toList());
+
+        } catch (IllegalArgumentException e) {
+            typeOffreEnum = null;
+        }
     }
 
-    @PostMapping
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle){
-        return vehicleService.saveVehicle(vehicle);
+    if (budgetMax != null) {
+        vehicules = vehicules.stream()
+                .filter(v ->
+                        (v.getPrixAchat() != null && v.getPrixAchat() <= budgetMax)
+                                || (v.getLoyerMensuel() != null && v.getLoyerMensuel() <= budgetMax))
+                .collect(Collectors.toList());
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteVehicle(@PathVariable Long id){
-        vehicleService.deleteVehicle(id);
+    model.addAttribute("vehicules", vehicules);
+    model.addAttribute("marque", marque);
+    model.addAttribute("modele", modele);
+    model.addAttribute("typeOffre", typeOffreEnum);
+    model.addAttribute("budgetMax", budgetMax);
+
+    return "vehicules/liste";
+}
+
+    @GetMapping("/vehicules/{id}")
+    public String detailVehicule(@PathVariable Long id, Model model) {
+        Optional<Vehicle> vehicleOpt = vehicleRepository.findById(id);
+
+        if (vehicleOpt.isEmpty()) {
+            return "redirect:/vehicules";
+        }
+
+        model.addAttribute("vehicule", vehicleOpt.get());
+        return "vehicules/detail";
     }
 }

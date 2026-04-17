@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+     
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Nouveau Dossier - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Header -->
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main>
+        <div class="container">
+            <h1>Nouveau Dossier</h1>
+
+            <div class="form-container">
+                <form th:action="@{/dossiers}" method="post" class="auth-form">
+                    <div class="form-group">
+                        <label for="typeOffre">Type d'offre *</label>
+                        <select id="typeOffre" name="typeOffre" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="ACHAT">Achat</option>
+                            <option value="LOCATION">Location (LLD)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehiculeId">Véhicule souhaité *</label>
+                        <select id="vehiculeId" name="vehiculeId" required>
+                            <option value="">Sélectionnez un véhicule...</option>
+                            <option th:each="vehicule : ${vehicules}" 
+                                    th:value="${vehicule.id}"
+                                    th:text="${vehicule.marque + ' ' + vehicule.modele + ' - ' + vehicule.prixAchat + ' €'}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Budget maximum (€)</label>
+                        <input type="number" id="budget" name="budget" placeholder="Optionnel">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="commentaire">Commentaires</label>
+                        <textarea id="commentaire" name="commentaire" rows="4" placeholder="Précisez vos attentes, vos besoins particuliers..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Créer le dossier</button>
+                        <a th:href="@{/dossiers}" class="btn-secondary">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
