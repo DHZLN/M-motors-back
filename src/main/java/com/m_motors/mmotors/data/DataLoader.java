@@ -73,7 +73,7 @@ public class DataLoader implements CommandLineRunner {
                 .prixAchat(72000.0)
                 .loyerMensuel(850.0)
                 .typeOffre(TypeOffre.ACHAT)
-                .photoUrl("https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+                .photoUrl("/img/bmw.jpg")
                 .build(),
             Vehicle.builder()
                 .marque("Audi")
@@ -84,7 +84,7 @@ public class DataLoader implements CommandLineRunner {
                 .prixAchat(58000.0)
                 .loyerMensuel(720.0)
                 .typeOffre(TypeOffre.LLD)
-                .photoUrl("https://images.pexels.com/photos/457418/pexels-photo-457418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+                .photoUrl("/img/audiq5.jpg")
                 .build(),
             Vehicle.builder()
                 .marque("Porsche")
@@ -95,7 +95,7 @@ public class DataLoader implements CommandLineRunner {
                 .prixAchat(95000.0)
                 .loyerMensuel(1200.0)
                 .typeOffre(TypeOffre.LLD)
-                .photoUrl("https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+                .photoUrl("/img/porsche.jpg")
                 .build(),
             Vehicle.builder()
                 .marque("Mercedes-Benz")
@@ -106,7 +106,7 @@ public class DataLoader implements CommandLineRunner {
                 .prixAchat(48000.0)
                 .loyerMensuel(650.0)
                 .typeOffre(TypeOffre.ACHAT)
-                .photoUrl("https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+                .photoUrl("/img/mercedes.jpg")
                 .build(),
             Vehicle.builder()
                 .marque("Tesla")
@@ -117,7 +117,7 @@ public class DataLoader implements CommandLineRunner {
                 .prixAchat(45000.0)
                 .loyerMensuel(580.0)
                 .typeOffre(TypeOffre.LLD)
-                .photoUrl("https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+               .photoUrl("/img/tesla.jpg")
                 .build()
         );
 

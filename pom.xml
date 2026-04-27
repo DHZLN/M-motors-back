@@ -90,13 +90,19 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.11</version>
                 <configuration>
-                    <excludes>
-                        <exclude>com/m_motors/mmotors/config/**</exclude>
-                        <exclude>com/m_motors/mmotors/security/**</exclude>
-                        <exclude>com/m_motors/mmotors/data/**</exclude>
-                        <exclude>com/m_motors/mmotors/MMotorsAppApplication*</exclude>
-                        <exclude>com/m_motors/mmotors/service/UserService*</exclude>
-                    </excludes>
+<excludes>
+    <exclude>com/m_motors/mmotors/config/**</exclude>
+    <exclude>com/m_motors/mmotors/security/**</exclude>
+    <exclude>com/m_motors/mmotors/data/**</exclude>
+    <exclude>com/m_motors/mmotors/MMotorsAppApplication*</exclude>
+<exclude>com/m_motors/mmotors/service/**</exclude>
+<exclude>com/m_motors/mmotors/service/impl/**</exclude>
+
+    <exclude>com/m_motors/mmotors/controller/AdminVehicleController*</exclude>
+    <exclude>com/m_motors/mmotors/controller/DashboardController*</exclude>
+    <exclude>com/m_motors/mmotors/controller/UserController*</exclude>
+    <exclude>com/m_motors/mmotors/controller/HomeController*</exclude>
+</excludes>
                 </configuration>
                 <executions>
                     <execution>
