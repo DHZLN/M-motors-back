@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des véhicules - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="admin-header">
+    <nav>
+        <a th:href="@{/admin/dashboard}">Tableau de bord</a>
+        <a th:href="@{/admin/dossiers}">Gérer les dossiers</a>
+        <a th:href="@{/admin/vehicules}">Gérer les véhicules</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button type="submit">Déconnexion</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1>Gestion des véhicules</h1>
+
+        <div class="form-actions">
+            <a th:href="@{/admin/vehicules/new}" class="btn-primary">Ajouter un véhicule</a>
+        </div>
+
+        <div th:if="${vehicules == null or vehicules.isEmpty()}">
+            <p>Aucun véhicule trouvé.</p>
+        </div>
+
+        <div class="dossiers-table" th:if="${vehicules != null and !vehicules.isEmpty()}">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Marque</th>
+                    <th>Modèle</th>
+                    <th>Année</th>
+                    <th>Kilométrage</th>
+                    <th>Prix achat</th>
+                    <th>Loyer mensuel</th>
+                    <th>Type d'offre</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="vehicule : ${vehicules}">
+                    <td th:text="${vehicule.id}">1</td>
+                    <td th:text="${vehicule.marque}">Audi</td>
+                    <td th:text="${vehicule.modele}">Q5</td>
+                    <td th:text="${vehicule.annee}">2024</td>
+                    <td th:text="${vehicule.kilometrage}">15 000</td>
+                    <td th:text="${vehicule.prixAchat}">45 000</td>
+                    <td th:text="${vehicule.loyerMensuel}">650</td>
+                    <td th:text="${vehicule.typeOffre}">ACHAT</td>
+                    <td>
+                        <a th:href="@{/admin/vehicules/edit/{id}(id=${vehicule.id})}" class="btn-small">Modifier</a>
+
+                        <form th:action="@{/admin/vehicules/delete/{id}(id=${vehicule.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="btn-small"
+                                    onclick="return confirm('Supprimer ce véhicule ?')">
+                                Supprimer
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

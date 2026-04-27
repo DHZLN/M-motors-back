@@ -1,57 +1,131 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
-      lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}">Détail Dossier - M-Motors</title>
+    <title>Détail Dossier - M-Motors</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
-    <!-- Header -->
-    <div th:replace="~{fragments/header :: header}"></div>
 
-    <main>
-        <div class="container">
-            <h1>Dossier #<span th:text="${dossier.id}"></span></h1>
+<body class="client-body">
 
-            <div class="dossier-actions">
-                <a th:href="@{/dossiers}" class="btn-secondary">Retour à mes dossiers</a>
-            </div>
+<div th:replace="~{fragments/header :: header}"></div>
 
-            <div class="detail-card">
-                <h2>Informations générales</h2>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <strong>Statut :</strong>
-                        <span th:class="${'statut-' + #strings.toLowerCase(dossier.statut)}"
-                              th:text="${dossier.statut}"></span>
-                    </div>
-                    <div class="detail-item">
-                        <strong>Type d'offre :</strong>
-                        <span th:text="${dossier.typeOffre}"></span>
-                    </div>
-                    <div class="detail-item">
-                        <strong>Date de création :</strong>
-                        <span th:text="${#temporals.format(dossier.dateCreation, 'dd/MM/yyyy HH:mm')}"></span>
-                    </div>
-                </div>
+<main class="dossier-detail-page">
+    <div class="dossier-detail-wrapper">
 
-                <h2>Véhicule concerné</h2>
-                <div th:if="${dossier.vehicule != null}" class="vehicule-info">
-                    <p><strong>Marque :</strong> <span th:text="${dossier.vehicule.marque}"></span></p>
-                    <p><strong>Modèle :</strong> <span th:text="${dossier.vehicule.modele}"></span></p>
-                    <p><strong>Prix :</strong> <span th:text="${dossier.vehicule.prixAchat + ' €'}"></span></p>
-                </div>
-                <p th:unless="${dossier.vehicule != null}">Aucun véhicule associé</p>
-
-                <h2>Historique</h2>
-                <p>L'historique des modifications sera affiché ici.</p>
-            </div>
+        <div class="dossier-detail-header">
+            <p class="kicker">Suivi de dossier</p>
+            <h1>Dossier #<span th:text="${dossier.id}">1</span></h1>
+            <p>Consultez l’état de votre demande et complétez votre dossier en ligne.</p>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <div th:replace="~{fragments/footer :: footer}"></div>
+        <div class="dossier-detail-grid">
+
+            <section class="dossier-detail-card">
+                <h2>Informations générales</h2>
+
+                <div class="info-line">
+                    <strong>Statut</strong>
+                    <span class="status-badge" th:text="${dossier.statut}">EN_ATTENTE_DOCUMENTS</span>
+                </div>
+
+                <div class="info-line">
+                    <strong>Type d'offre</strong>
+                    <span th:text="${dossier.typeOffre}">ACHAT</span>
+                </div>
+
+                <div class="info-line">
+                    <strong>Date de création</strong>
+                    <span th:if="${dossier.dateCreation != null}"
+                          th:text="${#temporals.format(dossier.dateCreation, 'dd/MM/yyyy HH:mm')}">
+                    </span>
+                    <span th:unless="${dossier.dateCreation != null}">Non renseignée</span>
+                </div>
+
+                <h2 style="margin-top: 30px;">Véhicule concerné</h2>
+
+                <div th:if="${dossier.vehicule != null}">
+                    <div class="info-line">
+                        <strong>Marque</strong>
+                        <span th:text="${dossier.vehicule.marque}">BMW</span>
+                    </div>
+
+                    <div class="info-line">
+                        <strong>Modèle</strong>
+                        <span th:text="${dossier.vehicule.modele}">Série 5</span>
+                    </div>
+
+                    <div class="info-line">
+                        <strong>Prix</strong>
+                        <span th:text="${dossier.vehicule.prixAchat + ' €'}">72 000 €</span>
+                    </div>
+                </div>
+
+                <p th:unless="${dossier.vehicule != null}">Aucun véhicule associé.</p>
+            </section>
+
+            <section class="dossier-detail-card">
+                <h2>Documents justificatifs</h2>
+
+                <p style="color:#666; margin-bottom: 18px;">
+                    Ajoutez les documents nécessaires pour compléter votre dossier 100% en ligne.
+                </p>
+
+                <form class="upload-zone"
+                      th:action="@{/dossiers/{id}/upload(id=${dossier.id})}"
+                      method="post"
+                      enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="typeDocument">Type de document</label>
+                        <select id="typeDocument" name="typeDocument" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="PIECE_IDENTITE">Pièce d'identité</option>
+                            <option value="JUSTIFICATIF_DOMICILE">Justificatif de domicile</option>
+                            <option value="JUSTIFICATIF_REVENUS">Justificatif de revenus</option>
+                            <option value="AUTRE">Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file">Fichier</label>
+                        <input type="file" id="file" name="file" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        Téléverser le document
+                    </button>
+                </form>
+
+                <div th:if="${dossier.documents != null and !dossier.documents.isEmpty()}" style="margin-top: 28px;">
+                    <h3>Documents envoyés</h3>
+
+                    <ul style="margin-top: 12px; padding-left: 20px;">
+                        <li th:each="doc : ${dossier.documents}" style="margin-bottom: 8px;">
+                            <strong th:text="${doc.typeDocument}">TYPE</strong>
+                            -
+                            <span th:text="${doc.nomOriginal}">document.pdf</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="document-empty"
+                     th:if="${dossier.documents == null or dossier.documents.isEmpty()}">
+                    Aucun document téléversé pour le moment.
+                </div>
+            </section>
+
+        </div>
+
+        <div class="dossier-detail-actions">
+            <a th:href="@{/dossiers}" class="btn-secondary">Retour à mes dossiers</a>
+        </div>
+
+    </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>

@@ -5,46 +5,121 @@
     <title>Détail dossier - M-Motors</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
 
-<header class="admin-header">
-    <nav>
-        <a th:href="@{/admin/dashboard}">Tableau de Bord</a>
-        <a th:href="@{/admin/dossiers}">Retour aux dossiers</a>
-        <form th:action="@{/logout}" method="post" style="display:inline;">
-            <button type="submit">Déconnexion</button>
-        </form>
+<body class="admin-body">
+
+<header class="admin-topbar">
+    <div class="admin-logo">M-Motors <span>Admin</span></div>
+
+    <nav class="admin-nav">
+        <a th:href="@{/admin/dashboard}">Tableau de bord</a>
+        <a th:href="@{/admin/dossiers}">Dossiers</a>
+        <a th:href="@{/admin/vehicules}">Véhicules</a>
+        <a th:href="@{/}">Voir le site</a>
     </nav>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="admin-logout">Déconnexion</button>
+    </form>
 </header>
 
-<main>
-    <div class="container">
-        <h1>Détail du dossier</h1>
+<main class="admin-dashboard">
+    <section class="admin-hero">
+        <p class="admin-kicker">Traitement du dossier</p>
+        <h1>Dossier #<span th:text="${dossier.id}">1</span></h1>
+        <p>Consultez les informations du client, du véhicule et mettez à jour le statut du dossier.</p>
+    </section>
 
-        <p><strong>ID :</strong> <span th:text="${dossier.id}">1</span></p>
-        <p><strong>Client :</strong> <span th:text="${dossier.client != null ? dossier.client.email : 'N/A'}">client@test.com</span></p>
-        <p><strong>Véhicule :</strong>
-            <span th:text="${dossier.vehicule != null ? dossier.vehicule.marque + ' ' + dossier.vehicule.modele : 'N/A'}">Audi Q5</span>
-        </p>
-        <p><strong>Type d'offre :</strong> <span th:text="${dossier.typeOffre}">LLD</span></p>
-        <p><strong>Statut actuel :</strong> <span th:text="${dossier.statut}">EN_ATTENTE_DOCUMENTS</span></p>
+    <section class="dossier-detail-grid">
+        <div class="dossier-detail-card">
+            <h2>Informations générales</h2>
 
-        <h2>Changer le statut</h2>
+            <div class="info-line">
+                <strong>Client</strong>
+                <span th:text="${dossier.client != null ? dossier.client.email : 'N/A'}">client@email.com</span>
+            </div>
 
-        <form th:action="@{/admin/dossiers/{id}/statut(id=${dossier.id})}" method="post">
-            <label for="statut">Nouveau statut :</label>
-            <select id="statut" name="statut">
-                <option th:each="statut : ${statuts}"
-                        th:value="${statut.name()}"
-                        th:text="${statut.name()}"
-                        th:selected="${statut == dossier.statut}">
-                </option>
-            </select>
+            <div class="info-line">
+                <strong>Véhicule</strong>
+                <span th:text="${dossier.vehicule != null ? dossier.vehicule.marque + ' ' + dossier.vehicule.modele : 'N/A'}">
+                    BMW Série 5
+                </span>
+            </div>
 
-            <button type="submit">Mettre à jour</button>
-        </form>
+            <div class="info-line">
+                <strong>Type d'offre</strong>
+                <span th:text="${dossier.typeOffre}">ACHAT</span>
+            </div>
+
+            <div class="info-line">
+                <strong>Statut actuel</strong>
+                <span class="status-badge" th:text="${dossier.statut}">EN_ATTENTE_DOCUMENTS</span>
+            </div>
+        </div>
+
+        <div class="dossier-detail-card">
+            <h2>Changer le statut</h2>
+
+            <form th:action="@{/admin/dossiers/{id}/statut(id=${dossier.id})}" method="post">
+                <div class="form-group">
+                    <label for="statut">Nouveau statut</label>
+                    <select id="statut" name="statut" required>
+                        <option th:each="statut : ${statuts}"
+                                th:value="${statut}"
+                                th:text="${statut}"
+                                th:selected="${statut == dossier.statut}">
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Mettre à jour</button>
+            </form>
+
+            <div class="document-empty" style="margin-top: 24px;">
+                Le changement de statut permettra au client de suivre l’avancement de son dossier depuis son espace personnel.
+            </div>
+        </div>
+    </section>
+
+    <section class="dossier-detail-card" style="margin-top: 28px;">
+        <h2>Documents téléversés</h2>
+
+        <div th:if="${dossier.documents != null and !dossier.documents.isEmpty()}">
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Nom du fichier</th>
+                        <th>Format</th>
+                        <th>Taille</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="doc : ${dossier.documents}">
+                        <td th:text="${doc.typeDocument}">PIECE_IDENTITE</td>
+                        <td th:text="${doc.nomOriginal}">document.pdf</td>
+                        <td th:text="${doc.typeMime}">application/pdf</td>
+                        <td th:text="${doc.tailleOctets + ' octets'}">12000 octets</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="document-empty" th:if="${dossier.documents == null or dossier.documents.isEmpty()}">
+            Aucun document téléversé pour ce dossier.
+        </div>
+    </section>
+
+    <div class="dossier-detail-actions">
+        <a th:href="@{/admin/dossiers}" class="btn-secondary">Retour aux dossiers</a>
     </div>
 </main>
+
+<footer class="admin-footer">
+    © 2026 M-Motors. Tous droits réservés.
+</footer>
 
 </body>
 </html>

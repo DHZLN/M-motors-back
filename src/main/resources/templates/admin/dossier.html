@@ -5,52 +5,85 @@
     <title>Gestion des dossiers - M-Motors</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body class="admin-body">
 
-<header class="admin-header">
-    <nav>
-        <a th:href="@{/admin/dashboard}">Tableau de Bord</a>
-        <a th:href="@{/admin/dossiers}">Gérer les Dossiers</a>
-        <form th:action="@{/logout}" method="post" style="display:inline;">
-            <button type="submit">Déconnexion</button>
-        </form>
+<header class="admin-topbar">
+    <div class="admin-logo">M-Motors <span>Admin</span></div>
+
+    <nav class="admin-nav">
+        <a th:href="@{/admin/dashboard}">Tableau de bord</a>
+        <a th:href="@{/admin/dossiers}">Dossiers</a>
+        <a th:href="@{/admin/vehicules}">Véhicules</a>
+        <a th:href="@{/}">Voir le site</a>
     </nav>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="admin-logout">Déconnexion</button>
+    </form>
 </header>
 
-<main>
-    <div class="container">
-        <h1>Gestion des dossiers</h1>
+<main class="admin-dashboard">
+    <section class="admin-hero">
+        <div>
+            <p class="admin-kicker">Back-office</p>
+            <h1>Gestion des dossiers</h1>
+            <p>Visualisez les demandes clients et accédez au détail pour valider ou refuser les dossiers.</p>
+        </div>
+    </section>
 
-        <div th:if="${dossiers == null or dossiers.isEmpty()}">
-            <p>Aucun dossier trouvé.</p>
+    <section class="admin-table-card">
+        <div th:if="${dossiers == null or dossiers.isEmpty()}" class="document-empty">
+            Aucun dossier trouvé.
         </div>
 
-        <table th:if="${dossiers != null and !dossiers.isEmpty()}" border="1" cellpadding="8">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Client</th>
-                <th>Véhicule</th>
-                <th>Type d'offre</th>
-                <th>Statut</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="dossier : ${dossiers}">
-                <td th:text="${dossier.id}">1</td>
-                <td th:text="${dossier.client != null ? dossier.client.email : 'N/A'}">client@test.com</td>
-                <td th:text="${dossier.vehicule != null ? dossier.vehicule.marque + ' ' + dossier.vehicule.modele : 'N/A'}">Audi Q5</td>
-                <td th:text="${dossier.typeOffre}">LLD</td>
-                <td th:text="${dossier.statut}">EN_ATTENTE_DOCUMENTS</td>
-                <td>
-                    <a th:href="@{/admin/dossiers/{id}(id=${dossier.id})}">Voir le détail</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <div th:if="${dossiers != null and !dossiers.isEmpty()}" class="admin-table-wrapper">
+            <table class="admin-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Véhicule</th>
+                    <th>Type d'offre</th>
+                    <th>Statut</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="dossier : ${dossiers}">
+                    <td th:text="${dossier.id}">1</td>
+
+                    <td th:text="${dossier.client != null ? dossier.client.email : 'N/A'}">
+                        client@email.com
+                    </td>
+
+                    <td th:text="${dossier.vehicule != null ? dossier.vehicule.marque + ' ' + dossier.vehicule.modele : 'N/A'}">
+                        BMW Série 5
+                    </td>
+
+                    <td>
+                        <span class="admin-pill" th:text="${dossier.typeOffre}">ACHAT</span>
+                    </td>
+
+                    <td>
+                        <span class="status-badge" th:text="${dossier.statut}">EN_ATTENTE_DOCUMENTS</span>
+                    </td>
+
+                    <td>
+                        <a th:href="@{/admin/dossiers/{id}(id=${dossier.id})}" class="btn-small">
+                            Voir le détail
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 </main>
+
+<footer class="admin-footer">
+    © 2026 M-Motors. Tous droits réservés.
+</footer>
 
 </body>
 </html>

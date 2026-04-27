@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DossierService {
-
     List<Dossier> findAll();
-
     Optional<Dossier> findById(Long id);
-
-    void updateStatut(Long id, String statut);
+    Dossier save(Dossier dossier);
+    void deleteById(Long id);
+    Dossier updateStatut(Long id, String statut);
 }

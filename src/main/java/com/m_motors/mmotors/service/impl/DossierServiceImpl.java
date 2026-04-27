@@ -3,59 +3,47 @@ package com.m_motors.mmotors.service.impl;
 import com.m_motors.mmotors.model.Dossier;
 import com.m_motors.mmotors.model.StatutDossier;
 import com.m_motors.mmotors.repository.DossierRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import com.m_motors.mmotors.service.DossierService;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+@Service
+public class DossierServiceImpl implements DossierService {
 
-class DossierServiceImplTest {
+    private final DossierRepository dossierRepository;
 
-    private DossierRepository dossierRepository;
-    private DossierServiceImpl dossierService;
-
-    @BeforeEach
-    void setUp() {
-        dossierRepository = mock(DossierRepository.class);
-        dossierService = new DossierServiceImpl(dossierRepository);
+    public DossierServiceImpl(DossierRepository dossierRepository) {
+        this.dossierRepository = dossierRepository;
     }
 
-    @Test
-    void findAll_shouldReturnList() {
-        dossierService.findAll();
-        verify(dossierRepository).findAll();
+    @Override
+    public List<Dossier> findAll() {
+        return dossierRepository.findAll();
     }
 
-    @Test
-    void findById_shouldReturnDossier() {
-        Dossier dossier = new Dossier();
-        when(dossierRepository.findById(1L)).thenReturn(Optional.of(dossier));
-
-        Optional<Dossier> result = dossierService.findById(1L);
-
-        assertTrue(result.isPresent());
+    @Override
+    public Optional<Dossier> findById(Long id) {
+        return dossierRepository.findById(id);
     }
 
-    @Test
-    void updateStatut_shouldUpdateStatus() {
-        Dossier dossier = new Dossier();
-        when(dossierRepository.findById(1L)).thenReturn(Optional.of(dossier));
-
-        dossierService.updateStatut(1L, "ACCEPTE");
-
-        assertEquals(StatutDossier.ACCEPTE, dossier.getStatut());
-        verify(dossierRepository).save(dossier);
+    @Override
+    public Dossier save(Dossier dossier) {
+        return dossierRepository.save(dossier);
     }
 
-    @Test
-    void updateStatut_shouldThrowException_whenNotFound() {
-        when(dossierRepository.findById(1L)).thenReturn(Optional.empty());
+    @Override
+    public void deleteById(Long id) {
+        dossierRepository.deleteById(id);
+    }
 
-        assertThrows(RuntimeException.class, () ->
-                dossierService.updateStatut(1L, "ACCEPTE")
-        );
+    @Override
+    public Dossier updateStatut(Long id, String statut) {
+        Dossier dossier = dossierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dossier non trouvé"));
+
+        dossier.setStatut(StatutDossier.valueOf(statut));
+        return dossierRepository.save(dossier);
     }
 }

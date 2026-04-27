@@ -1,10 +1,13 @@
 package com.m_motors.mmotors.controller;
 
+import com.m_motors.mmotors.model.Document;
 import com.m_motors.mmotors.model.Dossier;
 import com.m_motors.mmotors.model.StatutDossier;
+import com.m_motors.mmotors.model.TypeDocument;
 import com.m_motors.mmotors.model.TypeOffre;
 import com.m_motors.mmotors.model.User;
 import com.m_motors.mmotors.model.Vehicle;
+import com.m_motors.mmotors.repository.DocumentRepository;
 import com.m_motors.mmotors.repository.DossierRepository;
 import com.m_motors.mmotors.repository.VehicleRepository;
 import com.m_motors.mmotors.service.UserService;
@@ -14,11 +17,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,27 +37,30 @@ public class DossierController {
     private VehicleRepository vehicleRepository;
 
     @Autowired
+    private DocumentRepository documentRepository;
+
+    @Autowired
     private UserService userService;
 
- @GetMapping("/dossiers")
-public String mesDossiers(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-    String email = userDetails.getUsername();
+    @GetMapping("/dossiers")
+    public String mesDossiers(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String email = userDetails.getUsername();
 
-    var userOpt = userService.findByEmail(email);
+        var userOpt = userService.findByEmail(email);
 
-    if (userOpt.isEmpty()) {
-        model.addAttribute("dossiers", List.of());
+        if (userOpt.isEmpty()) {
+            model.addAttribute("dossiers", List.of());
+            model.addAttribute("title", "Mes Dossiers - M-Motors");
+            return "client/dossiers";
+        }
+
+        User user = userOpt.get();
+        List<Dossier> dossiers = dossierRepository.findByClientId(user.getId());
+
+        model.addAttribute("dossiers", dossiers);
         model.addAttribute("title", "Mes Dossiers - M-Motors");
         return "client/dossiers";
     }
-
-    User user = userOpt.get();
-    List<Dossier> dossiers = dossierRepository.findByClientId(user.getId());
-
-    model.addAttribute("dossiers", dossiers);
-    model.addAttribute("title", "Mes Dossiers - M-Motors");
-    return "client/dossiers";
-}
 
     @GetMapping("/dossiers/nouveau")
     public String nouveauDossier(Model model) {
@@ -113,5 +120,48 @@ public String mesDossiers(@AuthenticationPrincipal UserDetails userDetails, Mode
         model.addAttribute("dossier", dossier);
         model.addAttribute("title", "Dossier #" + id + " - M-Motors");
         return "client/detail-dossier";
+    }
+
+    @PostMapping("/dossiers/{id}/upload")
+    public String uploadDocument(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("typeDocument") TypeDocument typeDocument
+    ) throws Exception {
+
+        String email = userDetails.getUsername();
+
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+
+        Dossier dossier = dossierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dossier non trouvé"));
+
+        if (!dossier.getClient().getId().equals(user.getId())) {
+            throw new RuntimeException("Accès non autorisé");
+        }
+
+        String uploadDir = "uploads/dossiers/" + id;
+        Files.createDirectories(Paths.get(uploadDir));
+
+        String originalName = file.getOriginalFilename();
+        String fileName = System.currentTimeMillis() + "_" + originalName;
+        Path filePath = Paths.get(uploadDir, fileName);
+
+        Files.write(filePath, file.getBytes());
+
+        Document document = Document.builder()
+                .nomOriginal(originalName)
+                .cheminStockage(filePath.toString())
+                .typeMime(file.getContentType())
+                .tailleOctets(file.getSize())
+                .typeDocument(typeDocument)
+                .dossier(dossier)
+                .build();
+
+        documentRepository.save(document);
+
+        return "redirect:/dossiers/" + id;
     }
 }

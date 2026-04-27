@@ -1,47 +1,83 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Tableau de Bord Admin - M-Motors</title>
+    <title>Tableau de bord admin - M-Motors</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
-    <!-- Utilise une classe spécifique pour le header admin si nécessaire pour le style -->
-    <header class="admin-header">
-        <nav>
-            <a th:href="@{/admin/dashboard}">Tableau de Bord</a>
-            <a th:href="@{/admin/dossiers}">Gérer les Dossiers</a>
-            <a th:href="@{/admin/vehicules}">Gérer les Véhicules</a>
-            <a th:href="@{/admin/utilisateurs}">Gérer les Utilisateurs</a>
-            <form th:action="@{/logout}" method="post" style="display: inline;">
-                <button type="submit">Déconnexion</button>
-            </form>
-        </nav>
-    </header>
-    <main>
-        <div class="container">
-            <h1>Tableau de Bord Administrateur</h1>
-            <p>Vue d'ensemble et gestion des opérations de M-Motors.</p>
+<body class="admin-body">
 
-            <h2>Statistiques Rapides</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Dossiers en Attente</h3>
-                    <p class="stat-number">15</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Nouveaux Clients (aujourd'hui)</h3>
-                    <p class="stat-number">3</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Véhicules en Stock</h3>
-                    <p class="stat-number">120</p>
-                </div>
-            </div>
+<header class="admin-topbar">
+    <div class="admin-logo">M-Motors <span>Admin</span></div>
+
+    <nav class="admin-nav">
+        <a th:href="@{/admin/dashboard}">Tableau de bord</a>
+        <a th:href="@{/admin/dossiers}">Dossiers</a>
+        <a th:href="@{/admin/vehicules}">Véhicules</a>
+        <a th:href="@{/}">Voir le site</a>
+    </nav>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="admin-logout">Déconnexion</button>
+    </form>
+</header>
+
+<main class="admin-dashboard">
+    <section class="admin-hero">
+        <div>
+            <p class="admin-kicker">Back-office M-Motors</p>
+            <h1>Tableau de bord administrateur</h1>
+            <p>Gérez les dossiers clients, les véhicules à vendre et les offres de location longue durée.</p>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2026 M-Motors. Tous droits réservés.</p>
-    </footer>
+    </section>
+
+    <section class="admin-stats-grid">
+        <div class="admin-stat-card">
+            <span class="stat-icon">📁</span>
+            <h3>Dossiers en attente</h3>
+            <p class="stat-number">15</p>
+            <small>À analyser ou valider</small>
+        </div>
+
+        <div class="admin-stat-card">
+            <span class="stat-icon">👤</span>
+            <h3>Nouveaux clients</h3>
+            <p class="stat-number">3</p>
+            <small>Aujourd’hui</small>
+        </div>
+
+        <div class="admin-stat-card">
+            <span class="stat-icon">🚗</span>
+            <h3>Véhicules en stock</h3>
+            <p class="stat-number">120</p>
+            <small>Achat et LLD</small>
+        </div>
+    </section>
+
+    <section class="admin-actions-grid">
+        <a th:href="@{/admin/dossiers}" class="admin-action-card">
+            <h3>Gérer les dossiers</h3>
+            <p>Visualiser, accepter ou refuser les demandes d’achat et de location.</p>
+            <span>Accéder →</span>
+        </a>
+
+        <a th:href="@{/admin/vehicules}" class="admin-action-card">
+            <h3>Gérer les véhicules</h3>
+            <p>Ajouter, modifier ou basculer un véhicule entre achat et location.</p>
+            <span>Accéder →</span>
+        </a>
+
+        <a th:href="@{/}" class="admin-action-card">
+            <h3>Voir le site public</h3>
+            <p>Contrôler l’affichage côté client et le parcours utilisateur.</p>
+            <span>Accéder →</span>
+        </a>
+    </section>
+</main>
+
+<footer class="admin-footer">
+    © 2026 M-Motors. Tous droits réservés.
+</footer>
+
 </body>
 </html>

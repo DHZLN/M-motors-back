@@ -2,48 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - M-Motors</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-    <div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header}"></div>
 
-    <main class="standard-page">
-        <section class="page-hero">
-            <div class="container">
-                <h1>Contact</h1>
-                <p>
-                    Notre équipe est à votre disposition pour répondre à vos questions
-                    et vous accompagner dans votre projet automobile.
-                </p>
+<main class="contact-premium-page">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Contactez M-Motors</h2>
+            <p>Notre équipe vous accompagne dans votre projet automobile, de la recherche du véhicule jusqu’au suivi de votre dossier.</p>
+        </div>
+
+        <div class="contact-premium-grid">
+            <div class="contact-premium-card">
+                <div class="contact-icon">📍</div>
+                <h2>Informations</h2>
+                <p><strong>Email :</strong> contact@mmotors.com</p>
+                <p><strong>Téléphone :</strong> 01 23 45 67 89</p>
+                <p><strong>Adresse :</strong> 12 avenue des Véhicules Premium, Paris</p>
+                <p><strong>Horaires :</strong> Lundi au Samedi, 9h00 – 19h00</p>
             </div>
-        </section>
 
-        <section class="container page-section">
-            <div class="contact-layout">
-                <div class="contact-card">
-                    <h2>Informations de contact</h2>
-                    <p><strong>Email :</strong> contact@mmotors.com</p>
-                    <p><strong>Téléphone :</strong> 01 23 45 67 89</p>
-                    <p><strong>Adresse :</strong> 12 avenue des Véhicules Premium, Paris</p>
-                    <p><strong>Horaires :</strong> Lundi au Samedi, 9h00 - 19h00</p>
-                </div>
-
-                <div class="contact-card">
-                    <h2>Pourquoi nous contacter ?</h2>
-                    <p>Obtenir des informations sur un véhicule.</p>
-                    <p>Être conseillé entre achat et LLD.</p>
-                    <p>Connaître l’avancement de votre dossier.</p>
-                    <p>Être accompagné dans vos démarches.</p>
-                    <a th:href="@{/inscription}" class="btn-primary" style="margin-top: 18px;">Créer un compte</a>
-                </div>
+            <div class="contact-premium-card">
+                <div class="contact-icon">🏢</div>
+                <h2>Services à contacter</h2>
+                <p><strong>Service commercial :</strong> achat, LLD, choix du véhicule.</p>
+                <p><strong>Service après-vente :</strong> entretien, SAV, assistance et contrôle technique.</p>
+                <p><strong>Service financier :</strong> financement, dossier d’achat ou de location.</p>
+                <p><strong>Support IT :</strong> aide à la connexion ou suivi du dossier en ligne.</p>
             </div>
-        </section>
-    </main>
 
-    <div th:replace="~{fragments/footer :: footer}"></div>
+            <div class="contact-premium-card">
+                <div class="contact-icon">💬</div>
+                <h2>Pourquoi nous contacter ?</h2>
+                <p>Obtenir des informations sur un véhicule.</p>
+                <p>Être conseillé entre achat et LLD.</p>
+                <p>Connaître l’avancement de votre dossier.</p>
+                <p>Être accompagné dans vos démarches.</p>
+            </div>
+
+            <div class="contact-cta-card">
+                <div>
+                    <h2>Prêt à commencer votre projet ?</h2>
+                    <p>Créez votre compte pour déposer une demande d’achat ou de location longue durée.</p>
+                </div>
+                <a th:href="@{/inscription}" class="btn-primary">Créer un compte</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

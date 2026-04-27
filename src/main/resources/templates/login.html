@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<main class="login-page login-background-page">
+    <div class="login-background-overlay"></div>
+
+    <div class="login-panel-wrapper">
+        <div class="login-panel auth-form">
+            <h1>Connexion</h1>
+
+            <div th:if="${param.error}" class="alert alert-danger">
+                Email ou mot de passe incorrect.
+            </div>
+
+            <div th:if="${param.logout}" class="alert alert-info">
+                Vous avez été déconnecté.
+            </div>
+
+            <div th:if="${param.success}" class="alert alert-success">
+                Inscription réussie, vous pouvez maintenant vous connecter.
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="btn-primary login-submit-btn">Se connecter</button>
+            </form>
+
+            <p class="auth-switch">
+                Pas encore de compte ?
+                <a th:href="@{/inscription}">S'inscrire</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

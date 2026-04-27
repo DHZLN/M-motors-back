@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<main class="login-page login-background-page">
+    <div class="login-background-overlay"></div>
+
+    <div class="login-panel-wrapper">
+       <div class="login-panel auth-form register-panel">
+            <h1>Inscription</h1>
+
+            <div th:if="${param.error == 'password_mismatch'}" class="alert alert-danger">
+                Les mots de passe ne correspondent pas.
+            </div>
+
+            <div th:if="${param.error == 'email_exists'}" class="alert alert-danger">
+                Un compte avec cet email existe déjà.
+            </div>
+
+            <form th:action="@{/register}" method="post">
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+
+                <button type="submit" class="btn-primary login-submit-btn">Créer mon compte</button>
+            </form>
+
+            <p class="auth-switch">
+                Déjà inscrit ?
+                <a th:href="@{/login}">Se connecter</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

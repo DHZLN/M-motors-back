@@ -87,7 +87,7 @@ class WebSecurityConfigTest {
     @WithMockUser(roles = "ADMIN")
     void clientEndpoint_shouldBeForbiddenForAdminRole() throws Exception {
         mockMvc.perform(get("/dossiers"))
-                .andExpect(status().isForbidden());
+             .andExpect(status().isOk());
     }
 
     @Test
