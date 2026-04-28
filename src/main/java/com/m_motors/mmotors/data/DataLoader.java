@@ -106,7 +106,7 @@ public class DataLoader implements CommandLineRunner {
                 .prixAchat(48000.0)
                 .loyerMensuel(650.0)
                 .typeOffre(TypeOffre.ACHAT)
-                .photoUrl("/img/mercedes.jpg")
+                .photoUrl("https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
                 .build(),
             Vehicle.builder()
                 .marque("Tesla")
