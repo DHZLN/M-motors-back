@@ -2,52 +2,86 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Détail du véhicule</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Détail du véhicule - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
 
-<h1>Détail du véhicule</h1>
+<div th:replace="~{fragments/header :: header}"></div>
 
-<div th:if="${vehicule != null}">
-    <p><strong>Marque :</strong> <span th:text="${vehicule.marque}"></span></p>
-    <p><strong>Modèle :</strong> <span th:text="${vehicule.modele}"></span></p>
-    <p><strong>Année :</strong> <span th:text="${vehicule.annee}"></span></p>
-    <p><strong>Kilométrage :</strong> <span th:text="${vehicule.kilometrage}"></span></p>
+<main class="vehicle-detail-page">
+    <div class="container">
 
-    <p><strong>Type d'offre :</strong> <span th:text="${vehicule.typeOffre}"></span></p>
+        <div th:if="${vehicule != null}" class="vehicle-detail-grid">
 
-    <!-- Affichage conditionnel prix / loyer -->
-   <div th:if="${vehicule.typeOffre != null and vehicule.typeOffre.name() == 'ACHAT'}">
-        <p><strong>Prix achat :</strong> <span th:text="${vehicule.prixAchat}"></span> €</p>
+            <div class="vehicle-detail-image-card">
+                <img th:src="${vehicule.photoUrl != null ? vehicule.photoUrl : '/img/fond.jpg'}"
+                     alt="Photo véhicule"
+                     class="vehicle-detail-image">
+            </div>
+
+            <div class="vehicle-detail-info-card">
+                <p class="vehicle-detail-kicker">Véhicule premium</p>
+
+                <h1 th:text="${vehicule.marque + ' ' + vehicule.modele}">
+                    BMW Série 5
+                </h1>
+
+                <p class="vehicle-detail-description" th:text="${vehicule.description}">
+                    Description du véhicule
+                </p>
+
+                <div class="vehicle-detail-specs">
+                    <div class="detail-spec-box">
+                        <span class="detail-spec-label">Année</span>
+                        <span class="detail-spec-value" th:text="${vehicule.annee}">2023</span>
+                    </div>
+
+                    <div class="detail-spec-box">
+                        <span class="detail-spec-label">Kilométrage</span>
+                        <span class="detail-spec-value" th:text="${vehicule.kilometrage + ' km'}">15000 km</span>
+                    </div>
+
+                    <div class="detail-spec-box">
+                        <span class="detail-spec-label">Offre</span>
+                        <span class="detail-spec-value" th:text="${vehicule.typeOffre}">ACHAT</span>
+                    </div>
+                </div>
+
+                <div class="vehicle-detail-pricing">
+                    <div class="detail-price-card" th:if="${vehicule.prixAchat != null}">
+                        <span class="detail-price-label">Prix achat</span>
+                        <span class="detail-price-value" th:text="${vehicule.prixAchat + ' €'}">72000 €</span>
+                    </div>
+
+                    <div class="detail-price-card" th:if="${vehicule.loyerMensuel != null}">
+                        <span class="detail-price-label">Loyer mensuel</span>
+                        <span class="detail-price-value" th:text="${vehicule.loyerMensuel + ' € / mois'}">850 € / mois</span>
+                    </div>
+                </div>
+
+                <div class="vehicle-detail-actions">
+                    <a th:href="@{/dossiers/nouveau}" class="btn-primary">
+                        Déposer un dossier
+                    </a>
+
+                    <a th:href="@{/vehicules}" class="btn-outline-dark">
+                        Retour à la liste
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${vehicule == null}" class="form-container">
+            <h1>Véhicule introuvable</h1>
+            <a th:href="@{/vehicules}" class="btn-secondary">Retour à la liste</a>
+        </div>
+
     </div>
+</main>
 
-   <div th:if="${vehicule.typeOffre != null and vehicule.typeOffre.name() == 'LLD'}">
-        <p><strong>Loyer mensuel :</strong> <span th:text="${vehicule.loyerMensuel}"></span> €</p>
-    </div>
-
-    <p><strong>Description :</strong> <span th:text="${vehicule.description}"></span></p>
-
-    <hr>
-
-    <!-- Bouton dépôt de dossier -->
-    <div>
-        <a th:href="@{/dossiers/creer/{id}(id=${vehicule.id})}">
-            <button>📄 Déposer un dossier</button>
-        </a>
-    </div>
-</div>
-
-<!-- Cas où véhicule null -->
-<div th:if="${vehicule == null}">
-    <p>Véhicule introuvable.</p>
-</div>
-
-<hr>
-
-<p>
-    <a th:href="@{/vehicules}">⬅ Retour à la liste</a>
-</p>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>
