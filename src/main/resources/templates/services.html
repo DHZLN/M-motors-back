@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - M-Motors</title>
-
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
@@ -14,90 +13,91 @@
 
 <main class="contact-premium-page">
 
-    <section class="contact-premium-hero">
-        <p class="kicker">Services premium</p>
+    <div class="services-wrapper">
 
-        <h1>Nos Services</h1>
+        <section class="contact-premium-hero">
+            <p class="kicker">Services premium</p>
 
-        <p>
-            Une expérience premium pensée pour vous accompagner à chaque étape,
-            de la découverte du véhicule jusqu’au suivi de votre dossier.
-        </p>
-    </section>
-
-    <section class="contact-premium-grid">
-
-        <article class="contact-premium-card">
-            <div class="contact-icon">🚘</div>
-
-            <h2>Location Longue Durée</h2>
+            <h1>Nos Services</h1>
 
             <p>
-                Profitez d’une formule souple avec loyer mensuel, idéale pour rouler
-                avec un véhicule premium sans contrainte d’achat immédiat.
+                Une expérience premium pensée pour vous accompagner à chaque étape,
+                de la découverte du véhicule jusqu’au suivi de votre dossier.
             </p>
-        </article>
+        </section>
 
-        <article class="contact-premium-card">
-            <div class="contact-icon">🏷️</div>
+        <section class="contact-premium-grid">
 
-            <h2>Achat de véhicules</h2>
+            <article class="contact-premium-card">
+                <div class="contact-icon">🚘</div>
 
-            <p>
-                Découvrez une sélection de véhicules soigneusement choisis pour leur
-                qualité, leur élégance et leur excellent état général.
-            </p>
-        </article>
+                <h2>Location Longue Durée</h2>
 
-        <article class="contact-premium-card">
-            <div class="contact-icon">🛡️</div>
+                <p>
+                    Profitez d’une formule souple avec loyer mensuel, idéale pour rouler
+                    avec un véhicule premium sans contrainte d’achat immédiat.
+                </p>
+            </article>
 
-            <h2>Assurance</h2>
+            <article class="contact-premium-card">
+                <div class="contact-icon">🏷️</div>
 
-            <p>
-                Des solutions adaptées pour sécuriser votre véhicule et vous offrir
-                une sérénité totale au quotidien.
-            </p>
-        </article>
+                <h2>Achat de véhicules</h2>
 
-        <article class="contact-premium-card">
-            <div class="contact-icon">🆘</div>
+                <p>
+                    Découvrez une sélection de véhicules soigneusement choisis pour leur
+                    qualité, leur élégance et leur excellent état général.
+                </p>
+            </article>
 
-            <h2>Assistance dépannage</h2>
+            <article class="contact-premium-card">
+                <div class="contact-icon">🛡️</div>
 
-            <p>
-                En cas d’imprévu, bénéficiez d’une assistance rapide et efficace pour
-                reprendre la route dans les meilleures conditions.
-            </p>
-        </article>
+                <h2>Assurance</h2>
 
-        <article class="contact-premium-card">
-            <div class="contact-icon">🔧</div>
+                <p>
+                    Des solutions adaptées pour sécuriser votre véhicule et vous offrir
+                    une sérénité totale au quotidien.
+                </p>
+            </article>
 
-            <h2>Entretien & SAV</h2>
+            <article class="contact-premium-card">
+                <div class="contact-icon">🆘</div>
 
-            <p>
-                Un accompagnement professionnel pour l’entretien régulier, le suivi
-                technique et la qualité de service après-vente.
-            </p>
-        </article>
+                <h2>Assistance dépannage</h2>
 
-        <article class="contact-premium-card">
-            <div class="contact-icon">✅</div>
+                <p>
+                    En cas d’imprévu, bénéficiez d’une assistance rapide et efficace pour
+                    reprendre la route dans les meilleures conditions.
+                </p>
+            </article>
 
-            <h2>Contrôle technique</h2>
+            <article class="contact-premium-card">
+                <div class="contact-icon">🔧</div>
 
-            <p>
-                Une prise en charge simplifiée pour vous garantir conformité,
-                sécurité et tranquillité d’esprit.
-            </p>
-        </article>
+                <h2>Entretien & SAV</h2>
 
-    </section>
+                <p>
+                    Un accompagnement professionnel pour l’entretien régulier, le suivi
+                    technique et la qualité de service après-vente.
+                </p>
+            </article>
 
-    <section class="contact-premium-cta">
+            <article class="contact-premium-card">
+                <div class="contact-icon">✅</div>
 
-        <div>
+                <h2>Contrôle technique</h2>
+
+                <p>
+                    Une prise en charge simplifiée pour vous garantir conformité,
+                    sécurité et tranquillité d’esprit.
+                </p>
+            </article>
+
+        </section>
+
+        <section class="services-cta-box">
+
             <h2>Un accompagnement sur mesure</h2>
 
             <p>
@@ -105,13 +105,14 @@
                 pour vous proposer une expérience haut de gamme, aussi bien à l’achat
                 qu’en location longue durée.
             </p>
-        </div>
 
-        <a th:href="@{/vehicules}" class="btn-primary">
-            Découvrir nos véhicules
-        </a>
+            <a th:href="@{/vehicules}" class="btn-primary">
+                Découvrir nos véhicules
+            </a>
 
-    </section>
+        </section>
+
+    </div>
 
 </main>
 
