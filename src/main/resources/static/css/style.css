@@ -2305,3 +2305,197 @@ footer {
         padding: 35px 25px;
     }
 }
+
+/* ===== PAGE VEHICULES PREMIUM ===== */
+
+body {
+    background:
+        linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+        url('/img/fond.jpg') center center / cover no-repeat fixed;
+}
+
+/* espace de la page */
+main {
+    padding-top: 40px;
+}
+
+/* titre */
+.page-title {
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 42px;
+    color: #111;
+    animation: fadeUp 0.7s ease;
+}
+
+.page-title::after {
+    content: "";
+    display: block;
+    width: 95px;
+    height: 4px;
+    background: linear-gradient(90deg, #c8a876, #e8c98f);
+    border-radius: 999px;
+    margin: 14px auto 0;
+}
+
+/* layout véhicules */
+.vehicules-page {
+    padding-bottom: 70px;
+}
+
+/* bloc filtres */
+.vehicule-filters {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(200,168,118,0.25);
+    border-radius: 22px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.10);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    animation: fadeLeft 0.7s ease;
+}
+
+.vehicule-filters:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 55px rgba(0,0,0,0.14);
+}
+
+.vehicule-filters h2 {
+    font-size: 1.7rem;
+}
+
+.vehicule-filters input,
+.vehicule-filters select {
+    background: #f3f6fa;
+    border: 1px solid #dfe3ea;
+    min-height: 48px;
+}
+
+.vehicule-filters input:focus,
+.vehicule-filters select:focus {
+    outline: none;
+    border-color: #c8a876;
+    box-shadow: 0 0 0 4px rgba(200,168,118,0.18);
+}
+
+/* bouton rechercher */
+.vehicule-filters .btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, #d4b07a, #b9925f);
+    border-radius: 12px;
+    box-shadow: 0 10px 22px rgba(185,146,95,0.25);
+}
+
+.vehicule-filters .btn-primary:hover {
+    background: linear-gradient(135deg, #111, #2b2b2b);
+    transform: translateY(-2px);
+}
+
+/* cartes véhicules */
+.vehicule-card {
+    position: relative;
+    background: rgba(255,255,255,0.94);
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.55);
+    box-shadow: 0 14px 34px rgba(0,0,0,0.09);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    animation: fadeUp 0.7s ease;
+}
+
+.vehicule-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 24px 58px rgba(0,0,0,0.16);
+}
+
+/* effet reflet */
+.vehicule-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.25),
+        transparent
+    );
+    transform: translateX(-120%);
+    transition: 0.8s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.vehicule-card:hover::before {
+    transform: translateX(120%);
+}
+
+/* image */
+.vehicule-card-img {
+    transition: transform 0.55s ease, filter 0.55s ease;
+}
+
+.vehicule-card:hover .vehicule-card-img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+}
+
+/* contenu */
+.vehicule-card-content h3 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #111;
+}
+
+.vehicule-card-desc {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* prix */
+.price-value {
+    color: #c8a876;
+    font-weight: 800;
+}
+
+/* bouton détail */
+.vehicle-actions .btn-secondary,
+.vehicule-card .btn-secondary {
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(135deg, #111, #2a2a2a);
+    border-radius: 12px;
+    padding: 13px 18px;
+    transition: all 0.3s ease;
+}
+
+.vehicle-actions .btn-secondary:hover,
+.vehicule-card .btn-secondary:hover {
+    background: linear-gradient(135deg, #d4b07a, #b9925f);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(185,146,95,0.30);
+}
+
+/* petites animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-28px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
