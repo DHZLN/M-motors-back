@@ -1,25 +1,52 @@
 package com.m_motors.mmotors.controller;
 
-import com.m_motors.mmotors.model.User;
 import com.m_motors.mmotors.service.UserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-public class UserController { // Pas @Controller pour l'instant
+@Controller
+public class UserController {
+
     private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    public String showRegistrationForm() {
-        return "inscription";
+    // 👉 PAGE MOT DE PASSE OUBLIÉ
+    @GetMapping("/mot-de-passe-oublie")
+    public String forgotPasswordPage() {
+        return "mot-de-passe-oublie";
     }
 
-    public String registerUser(User user) {
-       userService.registerUser(user.getPrenom(), user.getNom(), user.getEmail(), user.getPassword()); // CORRECT
-        return "inscription-success"; // Ou redirection vers connexion
+    // 👉 ENVOI EMAIL RESET
+    @PostMapping("/mot-de-passe-oublie")
+    public String handleForgotPassword(@RequestParam String email) {
+        userService.createPasswordResetToken(email);
+        return "redirect:/mot-de-passe-oublie?success";
     }
 
-    public String showLoginForm() {
-        return "connexion";
+    // 👉 PAGE RESET PASSWORD
+    @GetMapping("/reset-password")
+    public String showResetPage(@RequestParam String token, Model model) {
+        model.addAttribute("token", token);
+        return "reset-password";
+    }
+
+    // 👉 RESET PASSWORD
+    @PostMapping("/reset-password")
+    public String resetPassword(
+            @RequestParam String token,
+            @RequestParam String password,
+            @RequestParam String confirmPassword
+    ) {
+        if (!password.equals(confirmPassword)) {
+            return "redirect:/reset-password?token=" + token + "&error";
+        }
+
+        userService.resetPassword(token, password);
+
+        return "redirect:/login?resetSuccess";
     }
 }

@@ -24,7 +24,9 @@ class UserServiceImplTest {
     void setUp() {
         userRepository = mock(UserRepository.class);
         passwordEncoder = mock(PasswordEncoder.class);
-        userService = new UserServiceImpl(userRepository, passwordEncoder);
+
+        // ✅ IMPORTANT : assignation
+        userService = new UserServiceImpl(userRepository, passwordEncoder, null, null);
     }
 
     @Test

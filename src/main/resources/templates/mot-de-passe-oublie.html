@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mot de passe oublié - M-Motors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<main class="login-page login-background-page">
+
+```
+<div class="login-background-overlay"></div>
+
+<div class="login-panel-wrapper">
+    <div class="login-panel auth-form">
+
+        <h1>Mot de passe oublié</h1>
+
+        <p class="subtitle">
+            Entrez votre email pour recevoir un lien de réinitialisation 🔐
+        </p>
+
+        <div th:if="${param.success}" class="alert alert-success">
+            Un email a été envoyé si le compte existe.
+        </div>
+
+        <form th:action="@{/mot-de-passe-oublie}" method="post">
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <button type="submit" class="btn-primary">
+                Envoyer le lien
+            </button>
+
+        </form>
+
+        <p class="auth-switch">
+            <a th:href="@{/login}">← Retour à la connexion</a>
+        </p>
+
+    </div>
+</div>
+```
+
+</main>
+
+</body>
+</html>

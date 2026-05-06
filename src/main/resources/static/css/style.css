@@ -27,7 +27,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     min-height: 100%;
 }
 
@@ -60,7 +61,9 @@ main {
     margin: 0 auto;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: var(--color-primary);
     font-weight: 600;
 }
@@ -78,6 +81,21 @@ h2 {
 h3 {
     font-size: 1.3rem;
     margin-bottom: 12px;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
 }
 
 /* Header */
@@ -201,7 +219,7 @@ header nav {
 .btn-outline {
     display: inline-block;
     padding: 14px 28px;
-    border: 1px solid rgba(255,255,255,0.35);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 8px;
     color: #fff;
     font-weight: 600;
@@ -209,8 +227,8 @@ header nav {
 }
 
 .btn-outline:hover {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.6);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 .btn-outline-dark {
@@ -298,7 +316,7 @@ footer {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.30) 100%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.55) 45%, rgba(0, 0, 0, 0.30) 100%);
     z-index: 1;
 }
 
@@ -336,7 +354,7 @@ footer {
     margin: 0 auto 30px auto;
     font-size: 1.15rem;
     line-height: 1.8;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .hero-actions {
@@ -355,6 +373,7 @@ footer {
     from {
         transform: scale(1);
     }
+
     to {
         transform: scale(1.08);
     }
@@ -395,7 +414,7 @@ footer {
     margin: 0 auto;
     background: var(--color-white);
     border-radius: 16px;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
     padding: 24px;
     display: flex;
     flex-wrap: wrap;
@@ -549,7 +568,7 @@ footer {
     background: #fff;
     padding: 28px;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .benefit-card h3 {
@@ -677,6 +696,7 @@ footer {
     margin-bottom: 12px;
 }
 
+
 /* Detail vehicle */
 .vehicle-detail-page {
     padding: 60px 0;
@@ -693,15 +713,20 @@ footer {
 .vehicle-detail-info-card {
     background: #ffffff;
     border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     overflow: hidden;
+}
+
+
+.vehicle-detail-image-card {
+    height: 520px;
 }
 
 .vehicle-detail-image {
     width: 100%;
     height: 100%;
-    min-height: 520px;
     object-fit: cover;
+    display: block;
 }
 
 .vehicle-detail-info-card {
@@ -716,7 +741,6 @@ footer {
     font-weight: 700;
     margin-bottom: 14px;
 }
-
 .vehicle-detail-info-card h1 {
     font-size: 2.6rem;
     line-height: 1.1;
@@ -1095,13 +1119,13 @@ footer {
         width: 94%;
     }
 }
- 
+
 /* Effet premium sur les cartes avantages */
 .benefit-card {
     background: #fff;
     padding: 28px;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     border: 1px solid transparent;
     position: relative;
@@ -1121,7 +1145,7 @@ footer {
 
 .benefit-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 34px rgba(0,0,0,0.12);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.12);
     border-color: rgba(200, 168, 118, 0.25);
 }
 
@@ -1165,7 +1189,7 @@ footer {
 .page-hero p {
     max-width: 760px;
     margin: 0 auto;
-    color: rgba(255,255,255,0.88);
+    color: rgba(255, 255, 255, 0.88);
     line-height: 1.8;
 }
 
@@ -1183,13 +1207,13 @@ footer {
     background: #fff;
     border-radius: 18px;
     padding: 28px;
-    box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .info-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 34px rgba(0,0,0,0.12);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.12);
 }
 
 .info-card h3 {
@@ -1212,7 +1236,7 @@ footer {
     background: #fff;
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
     text-align: center;
 }
 
@@ -1236,7 +1260,7 @@ footer {
     background: #fff;
     border-radius: 18px;
     padding: 36px;
-    box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 
 .contact-card h2 {
@@ -1250,6 +1274,7 @@ footer {
 }
 
 @media (max-width: 992px) {
+
     .info-grid,
     .contact-layout {
         grid-template-columns: 1fr;
@@ -1296,7 +1321,7 @@ footer {
     border-radius: 18px;
     padding: 22px;
 
-    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
 
     opacity: 0;
     visibility: hidden;
@@ -1367,16 +1392,10 @@ footer {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.50) 0%,
-            rgba(0, 0, 0, 0.30) 35%,
-            rgba(0, 0, 0, 0.18) 60%,
-            rgba(0, 0, 0, 0.35) 100%
-        );
+        linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
+        radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 100%);
     z-index: 1;
 }
-
 .login-panel-wrapper {
     position: relative;
     z-index: 2;
@@ -1517,7 +1536,7 @@ footer {
 .admin-body {
     min-height: 100vh;
     background:
-        linear-gradient(135deg, rgba(10,10,10,0.96), rgba(35,35,35,0.92)),
+        linear-gradient(135deg, rgba(10, 10, 10, 0.96), rgba(35, 35, 35, 0.92)),
         url('/img/fond.jpg') center center / cover no-repeat fixed;
     color: #fff;
 }
@@ -1530,7 +1549,7 @@ footer {
     justify-content: space-between;
     background: rgba(12, 12, 12, 0.82);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(200,168,118,0.25);
+    border-bottom: 1px solid rgba(200, 168, 118, 0.25);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -1555,7 +1574,7 @@ footer {
 }
 
 .admin-nav a {
-    color: rgba(255,255,255,0.86);
+    color: rgba(255, 255, 255, 0.86);
     font-weight: 600;
     transition: color 0.3s ease;
 }
@@ -1572,7 +1591,7 @@ footer {
     padding: 11px 18px;
     font-weight: 800;
     cursor: pointer;
-    box-shadow: 0 10px 24px rgba(200,168,118,0.25);
+    box-shadow: 0 10px 24px rgba(200, 168, 118, 0.25);
 }
 
 .admin-dashboard {
@@ -1583,11 +1602,11 @@ footer {
 }
 
 .admin-hero {
-    background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
-    border: 1px solid rgba(255,255,255,0.16);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 28px;
     padding: 46px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.30);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.30);
     backdrop-filter: blur(12px);
     margin-bottom: 34px;
 }
@@ -1607,7 +1626,7 @@ footer {
 }
 
 .admin-hero p {
-    color: rgba(255,255,255,0.82);
+    color: rgba(255, 255, 255, 0.82);
     max-width: 760px;
     font-size: 1.08rem;
 }
@@ -1620,18 +1639,18 @@ footer {
 }
 
 .admin-stat-card {
-    background: rgba(255,255,255,0.94);
+    background: rgba(255, 255, 255, 0.94);
     color: #111;
     border-radius: 24px;
     padding: 30px;
-    box-shadow: 0 18px 42px rgba(0,0,0,0.25);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.25);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     border-top: 5px solid #c8a876;
 }
 
 .admin-stat-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 26px 54px rgba(0,0,0,0.35);
+    box-shadow: 0 26px 54px rgba(0, 0, 0, 0.35);
 }
 
 .stat-icon {
@@ -1667,18 +1686,18 @@ footer {
 .admin-action-card {
     display: block;
     min-height: 220px;
-    background: rgba(17,17,17,0.88);
-    border: 1px solid rgba(200,168,118,0.28);
+    background: rgba(17, 17, 17, 0.88);
+    border: 1px solid rgba(200, 168, 118, 0.28);
     border-radius: 24px;
     padding: 30px;
-    box-shadow: 0 18px 42px rgba(0,0,0,0.28);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
     transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
 }
 
 .admin-action-card:hover {
     transform: translateY(-8px);
     border-color: #c8a876;
-    background: rgba(25,25,25,0.96);
+    background: rgba(25, 25, 25, 0.96);
 }
 
 .admin-action-card h3 {
@@ -1688,7 +1707,7 @@ footer {
 }
 
 .admin-action-card p {
-    color: rgba(255,255,255,0.72);
+    color: rgba(255, 255, 255, 0.72);
     line-height: 1.7;
     margin-bottom: 24px;
 }
@@ -1701,9 +1720,9 @@ footer {
 .admin-footer {
     text-align: center;
     padding: 26px 16px;
-    background: rgba(0,0,0,0.88);
-    border-top: 1px solid rgba(200,168,118,0.2);
-    color: rgba(255,255,255,0.82);
+    background: rgba(0, 0, 0, 0.88);
+    border-top: 1px solid rgba(200, 168, 118, 0.2);
+    color: rgba(255, 255, 255, 0.82);
 }
 
 @media (max-width: 992px) {
@@ -1726,12 +1745,13 @@ footer {
         font-size: 2.3rem;
     }
 }
+
 /* ===== ESPACE CLIENT PREMIUM ===== */
 
 .client-body {
     min-height: 100vh;
     background:
-        linear-gradient(135deg, rgba(250,250,250,0.96), rgba(245,245,245,0.92)),
+        linear-gradient(135deg, rgba(250, 250, 250, 0.96), rgba(245, 245, 245, 0.92)),
         url('/img/fond.jpg') center center / cover no-repeat fixed;
 }
 
@@ -1743,11 +1763,11 @@ footer {
 }
 
 .client-hero {
-    background: rgba(255,255,255,0.92);
+    background: rgba(255, 255, 255, 0.92);
     border-radius: 28px;
     padding: 48px;
-    box-shadow: 0 22px 54px rgba(0,0,0,0.12);
-    border: 1px solid rgba(200,168,118,0.25);
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(200, 168, 118, 0.25);
     margin-bottom: 34px;
 }
 
@@ -1782,14 +1802,14 @@ footer {
     border-radius: 24px;
     padding: 34px;
     min-height: 280px;
-    box-shadow: 0 18px 44px rgba(0,0,0,0.10);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.10);
     border-top: 5px solid #c8a876;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .client-action-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 26px 58px rgba(0,0,0,0.16);
+    box-shadow: 0 26px 58px rgba(0, 0, 0, 0.16);
 }
 
 .client-card-icon {
@@ -1824,12 +1844,13 @@ footer {
         font-size: 2.2rem;
     }
 }
+
 /* ===== NOUVEAU DOSSIER PREMIUM ===== */
 
 .dossier-create-page {
     min-height: calc(100vh - 120px);
     background:
-        linear-gradient(135deg, rgba(250,250,250,0.96), rgba(245,245,245,0.92)),
+        linear-gradient(135deg, rgba(250, 250, 250, 0.96), rgba(245, 245, 245, 0.92)),
         url('/img/fond.jpg') center center / cover no-repeat fixed;
     padding: 70px 0 90px;
 }
@@ -1867,11 +1888,11 @@ footer {
 .dossier-form-card {
     max-width: 620px;
     margin: 0 auto;
-    background: rgba(255,255,255,0.94);
+    background: rgba(255, 255, 255, 0.94);
     border-radius: 28px;
     padding: 42px;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.14);
-    border: 1px solid rgba(200,168,118,0.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
+    border: 1px solid rgba(200, 168, 118, 0.25);
 }
 
 .dossier-form-card .form-group {
@@ -1909,7 +1930,7 @@ footer {
     outline: none;
     border-color: #c8a876;
     background: #fff;
-    box-shadow: 0 0 0 4px rgba(200,168,118,0.18);
+    box-shadow: 0 0 0 4px rgba(200, 168, 118, 0.18);
 }
 
 .dossier-form-actions {
@@ -1942,7 +1963,7 @@ footer {
 
 .contact-premium-page {
     background:
-        linear-gradient(135deg, rgba(250,250,250,0.96), rgba(245,245,245,0.92)),
+        linear-gradient(135deg, rgba(250, 250, 250, 0.96), rgba(245, 245, 245, 0.92)),
         url('/img/fond.jpg') center center / cover no-repeat fixed;
     padding: 70px 0 90px;
 }
@@ -1955,17 +1976,17 @@ footer {
 }
 
 .contact-premium-card {
-    background: rgba(255,255,255,0.94);
+    background: rgba(255, 255, 255, 0.94);
     border-radius: 26px;
     padding: 34px;
-    box-shadow: 0 22px 54px rgba(0,0,0,0.12);
-    border: 1px solid rgba(200,168,118,0.25);
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(200, 168, 118, 0.25);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .contact-premium-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 28px 64px rgba(0,0,0,0.16);
+    box-shadow: 0 28px 64px rgba(0, 0, 0, 0.16);
 }
 
 .contact-premium-card h2 {
@@ -1991,7 +2012,7 @@ footer {
     justify-content: center;
     font-size: 1.6rem;
     margin-bottom: 20px;
-    box-shadow: 0 12px 28px rgba(200,168,118,0.25);
+    box-shadow: 0 12px 28px rgba(200, 168, 118, 0.25);
 }
 
 .contact-cta-card {
@@ -2000,7 +2021,7 @@ footer {
     color: #fff;
     border-radius: 28px;
     padding: 44px;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2013,7 +2034,7 @@ footer {
 }
 
 .contact-cta-card p {
-    color: rgba(255,255,255,0.75);
+    color: rgba(255, 255, 255, 0.75);
 }
 
 .contact-cta-card .btn-primary {
@@ -2038,7 +2059,7 @@ footer {
     min-height: 100vh;
     padding: 60px 0 90px;
     background:
-        linear-gradient(135deg, rgba(255,255,255,0.86), rgba(245,245,245,0.88)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(245, 245, 245, 0.88)),
         url('/img/fond.jpg') center center / cover no-repeat fixed;
 }
 
@@ -2074,11 +2095,11 @@ footer {
 }
 
 .dossier-detail-card {
-    background: rgba(255,255,255,0.96);
+    background: rgba(255, 255, 255, 0.96);
     border-radius: 26px;
     padding: 36px;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.13);
-    border: 1px solid rgba(200,168,118,0.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.13);
+    border: 1px solid rgba(200, 168, 118, 0.25);
 }
 
 .dossier-detail-card h2 {
@@ -2114,7 +2135,7 @@ footer {
 }
 
 .upload-zone {
-    border: 2px dashed rgba(200,168,118,0.55);
+    border: 2px dashed rgba(200, 168, 118, 0.55);
     border-radius: 20px;
     padding: 22px;
     background: #fafafa;
@@ -2152,11 +2173,11 @@ footer {
 /* ===== ADMIN TABLES PREMIUM ===== */
 
 .admin-table-card {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 26px;
     padding: 30px;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.20);
-    border: 1px solid rgba(200,168,118,0.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.20);
+    border: 1px solid rgba(200, 168, 118, 0.25);
 }
 
 .admin-table-wrapper {
@@ -2223,6 +2244,7 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
 .services-wrapper {
     max-width: 1200px;
     margin: 0 auto;
@@ -2252,11 +2274,11 @@ footer {
 }
 
 .contact-premium-card {
-    background: rgba(255,255,255,0.92);
+    background: rgba(255, 255, 255, 0.92);
     border-radius: 24px;
     padding: 32px;
     min-height: 260px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .contact-premium-card h2 {
@@ -2276,7 +2298,7 @@ footer {
     text-align: center;
     max-width: 900px;
     margin: 0 auto;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 .services-cta-box h2 {
@@ -2288,7 +2310,7 @@ footer {
     max-width: 650px;
     margin: 0 auto 30px;
     line-height: 1.8;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 @media (max-width: 992px) {
@@ -2310,7 +2332,7 @@ footer {
 
 body {
     background:
-        linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+        linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
         url('/img/fond.jpg') center center / cover no-repeat fixed;
 }
 
@@ -2347,19 +2369,19 @@ main {
 .vehicule-filters {
     flex: 0 0 280px;
     padding: 24px;
-    background: rgba(255,255,255,0.88);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(200,168,118,0.25);
+    border: 1px solid rgba(200, 168, 118, 0.25);
     border-radius: 22px;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.10);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.10);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     animation: fadeLeft 0.7s ease;
 }
 
 .vehicule-filters:hover {
     transform: translateY(-5px);
-    box-shadow: 0 24px 55px rgba(0,0,0,0.14);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.14);
 }
 
 .vehicule-filters h2 {
@@ -2390,14 +2412,14 @@ main {
 .vehicule-filters select:focus {
     outline: none;
     border-color: #c8a876;
-    box-shadow: 0 0 0 4px rgba(200,168,118,0.18);
+    box-shadow: 0 0 0 4px rgba(200, 168, 118, 0.18);
 }
 
 .vehicule-filters .btn-primary {
     width: 100%;
     background: linear-gradient(135deg, #d4b07a, #b9925f);
     border-radius: 12px;
-    box-shadow: 0 10px 22px rgba(185,146,95,0.25);
+    box-shadow: 0 10px 22px rgba(185, 146, 95, 0.25);
 }
 
 .vehicule-filters .btn-primary:hover {
@@ -2417,21 +2439,21 @@ main {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    background: rgba(255,255,255,0.86);
+    background: rgba(255, 255, 255, 0.86);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 28px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.55);
-    box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
     transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     animation: fadeUp 0.7s ease;
 }
 
 .vehicule-card:hover {
     transform: translateY(-7px);
-    border-color: rgba(200,168,118,0.38);
-    box-shadow: 0 24px 58px rgba(0,0,0,0.16);
+    border-color: rgba(200, 168, 118, 0.38);
+    box-shadow: 0 24px 58px rgba(0, 0, 0, 0.16);
 }
 
 .vehicule-card::after {
@@ -2439,12 +2461,10 @@ main {
     position: absolute;
     inset: 0;
     border-radius: 28px;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.28),
-        transparent
-    );
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.28),
+            transparent);
     transform: translateX(-120%);
     transition: 0.8s;
     pointer-events: none;
@@ -2474,11 +2494,9 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.94),
-        rgba(250,250,250,0.98)
-    );
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.94),
+            rgba(250, 250, 250, 0.98));
 }
 
 .vehicule-card-content h3 {
@@ -2543,7 +2561,7 @@ main {
     background: linear-gradient(135deg, #d4b07a, #b9925f);
     color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(185,146,95,0.30);
+    box-shadow: 0 10px 24px rgba(185, 146, 95, 0.30);
 }
 
 @keyframes fadeUp {

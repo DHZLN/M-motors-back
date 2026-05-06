@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -6,58 +7,84 @@
     <title>Inscription - M-Motors</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
 
 <main class="login-page login-background-page">
-    <div class="login-background-overlay"></div>
 
-    <div class="login-panel-wrapper">
-       <div class="login-panel auth-form register-panel">
-            <h1>Inscription</h1>
+```
+<div class="login-background-overlay"></div>
 
-            <div th:if="${param.error == 'password_mismatch'}" class="alert alert-danger">
-                Les mots de passe ne correspondent pas.
-            </div>
+<div class="login-panel-wrapper">
+    <div class="login-panel auth-form register-panel">
 
-            <div th:if="${param.error == 'email_exists'}" class="alert alert-danger">
-                Un compte avec cet email existe déjà.
-            </div>
+        <h1>Inscription</h1>
 
-            <form th:action="@{/register}" method="post">
-                <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="prenom" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="nom" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirmPassword">Confirmer le mot de passe</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
-                </div>
-
-                <button type="submit" class="btn-primary login-submit-btn">Créer mon compte</button>
-            </form>
-
-            <p class="auth-switch">
-                Déjà inscrit ?
-                <a th:href="@{/login}">Se connecter</a>
-            </p>
+        <!-- erreurs URL -->
+        <div th:if="${param.error == 'password_mismatch'}" class="alert alert-danger">
+            Les mots de passe ne correspondent pas.
         </div>
+
+        <div th:if="${param.error == 'email_exists'}" class="alert alert-danger">
+            Cet email est déjà utilisé.
+        </div>
+
+        <form th:action="@{/register}" th:object="${user}" method="post">
+
+            <!-- PRENOM -->
+            <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" th:field="*{prenom}" pattern="[A-Za-zÀ-ÿ\s-]+" required>
+                <small class="error"
+                       th:if="${#fields.hasErrors('prenom')}"
+                       th:errors="*{prenom}"></small>
+            </div>
+
+            <!-- NOM -->
+            <div class="form-group">
+                <label>Nom</label>
+                <input type="text" th:field="*{nom}" pattern="[A-Za-zÀ-ÿ\s-]+" required>
+                <small class="error"
+                       th:if="${#fields.hasErrors('nom')}"
+                       th:errors="*{nom}"></small>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" th:field="*{email}" required>
+                <small class="error"
+                       th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}"></small>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" th:field="*{password}" required>
+            </div>
+
+            <!-- CONFIRM -->
+            <div class="form-group">
+                <label>Confirmer le mot de passe</label>
+                <input type="password" name="confirmPassword" required>
+            </div>
+
+            <button type="submit" class="btn-primary login-submit-btn">
+                Créer mon compte
+            </button>
+
+        </form>
+
+        <p class="auth-switch">
+            Déjà inscrit ?
+            <a th:href="@{/login}">Se connecter</a>
+        </p>
+
     </div>
+</div>
+```
+
 </main>
 
 </body>

@@ -30,5 +30,6 @@ public class Vehicle {
     private TypeOffre typeOffre;
 
     private String description;
-    private String photoUrl;
+
+    private String imageUrl;
 }

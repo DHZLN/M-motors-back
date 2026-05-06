@@ -16,9 +16,9 @@
         <div th:if="${vehicule != null}" class="vehicle-detail-grid">
 
             <div class="vehicle-detail-image-card">
-                <img th:src="${vehicule.photoUrl != null ? vehicule.photoUrl : '/img/fond.jpg'}"
-                     alt="Photo véhicule"
-                     class="vehicle-detail-image">
+           <img th:src="${vehicule.imageUrl != null ? vehicule.imageUrl : '/img/fond.jpg'}"
+     alt="Photo véhicule"
+     class="vehicle-detail-image">
             </div>
 
             <div class="vehicle-detail-info-card">
