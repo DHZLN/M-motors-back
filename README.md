@@ -84,7 +84,7 @@ de simplifier le développement ;
 de limiter les coûts ;
 d’accélérer la mise en production du MVP ;
 tout en préparant une évolution future vers une architecture cloud plus robuste.
---- 
+
 
 ## 🔮 Architecture cible envisagée
 
