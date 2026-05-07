@@ -26,6 +26,7 @@ Il s’inscrit dans une stratégie de diversification des revenus de l’entrepr
 - Création de compte client
 - Authentification sécurisée
 - Accès différencié selon le rôle (client / back-office)
+- Accès à un espace personnel
 
 ## 🚘 Recherche & catalogue véhicules
 - Recherche de véhicules à l’achat ou en location longue durée
@@ -65,27 +66,50 @@ Il s’inscrit dans une stratégie de diversification des revenus de l’entrepr
 
 ---
 
-## 🏗️ Architecture générale
-- Front-end : React (SPA)
-- Back-end : API REST Spring Boot
-- Base de données : MySQL (relationnelle)
-- Stockage documents : Google Cloud Storage (GCS)
-- Hébergement : Google Cloud Platform (GCP)
-- Déploiement : Heroku
+ ## 🏗️ Architecture du projet
+Architecture MVP réellement développée
 
-Architecture conçue pour :
- - Séparation front / back
- - Scalabilité
- - Évolutivité fonctionnelle
- - Intégrations futures (signature électronique, reporting, automatisation)
-   
+L’application repose sur une architecture monolithique Spring Boot MVC.
+
+Stack technique MVP :
+Front-end : Thymeleaf / HTML / CSS
+Back-end : Spring Boot MVC
+Base de données : H2 Database
+Stockage documents : stockage local
+Déploiement : Docker + Render
+
+Cette architecture a été choisie afin :
+
+de simplifier le développement ;
+de limiter les coûts ;
+d’accélérer la mise en production du MVP ;
+tout en préparant une évolution future vers une architecture cloud plus robuste.
 --- 
+
+## 🔮 Architecture cible envisagée
+
+Une architecture cloud plus industrialisable a également été conçue afin d’anticiper :
+
+- une montée en charge ;
+- une meilleure persistance des données ;
+- des sauvegardes automatisées ;
+- du monitoring avancé ;
+- une meilleure scalabilité.
+
+ ## Évolutions futures possibles :
+PostgreSQL managé
+Stockage cloud (Google Cloud Storage)
+Load Balancer
+Monitoring & logging
+Sauvegardes automatiques
+Haute disponibilité
+
 ## 🛠️ Technologies utilisées
 
 ## Langages
 - Java
 - JavaScript
-- HTML
+- HTML 5
 - CSS
   
 ## Outils de développement :
@@ -93,54 +117,73 @@ Architecture conçue pour :
   
 ## Frameworks & bibliothèques
 
-- React – Interface utilisateur dynamique
-- Spring Boot  : Framework Web
-- Spring Security : Framework de sécurité
-- Spring Data JPA – Framework de gestion de base de données
-- JWT – Gestion des accès
-
+- Spring Boot
+- Spring MVC
+- Spring Security
+- Spring Data JPA
+- Hibernate
+- Thymeleaf
+  
 ## Base de données & stockage
 
-- MySQL – Données structurées (clients, véhicules, dossiers)
-- Google Cloud Storage – Documents dématérialisés
+H2 Database
 
 ## Outils & DevOps*
 
 - Git / GitHub
-- GitHub Actions (CI/CD)
+- GitHub 
 - Jira Software
 - Microsoft Teams
+- Docker
+- Render
+- JaCoCo
+- Trello
   ---
+
+  ## 🚀 Déploiement
+
+Application déployée sur Render 
+
+https://m-motors-1ugy.onrender.com 
+
 
 ## 🚀 Installation & démarrage
 ## Prérequis
 
 - Java 17 ou +
-- Node.js
-- MySQL
 - Maven
 - Git
 
-  ## Installation :
- 1. Cloner le dépôt
-     ``` https://github.com/DHZLN/M-motors  ```
-    2. Configurer la base de données MySQL
-    3. Renseigner les variables dans :
-    4.  ``` backend/src/main/resources/application.yml ```
-        ``` spring:
-             datasource :
-               url : jdbc:mysql://localhost:3306/motors
-               username : your_username
-               password : your_password
+  ## 🔑 Comptes de démonstration
+## Administrateur
+Email : admin@mmotors.com
+Mot de passe : admin123
 
-            jwt:
-              secret : your_secret_key  ```
+## Client
+Email : client@mmotors.com
+Mot de passe : test123
     
+## Cloner le projet 
+git clone https://github.com/DHZLN/M-motors-back.git
 
 
 
+## Lancer l’application
+  mvn spring-boot:run
 
+  ## 📌 Perspectives d’évolution
 
-  
+Le projet pourra évoluer vers :
+
+- une architecture cloud complète ;
+- une base PostgreSQL managée ;
+- un stockage objet cloud ;
+- des outils de supervision avancés ;
+- des sauvegardes automatisées ;
+- une architecture plus scalable ;
+- des intégrations externes (signature électronique, reporting, automatisation).
+## 👩‍💻 Réalisé dans le cadre du Bachelor Développeur d’Application Java – STUDI
+
+Projet conçu et développé par Hélène Dhervillez.
   
 
