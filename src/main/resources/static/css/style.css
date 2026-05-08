@@ -83,20 +83,7 @@ h3 {
     margin-bottom: 12px;
 }
 
-html,
-body {
-    height: 100%;
-    margin: 0;
-}
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1;
-}
 
 /* Header */
 header {
@@ -1848,7 +1835,9 @@ footer {
 /* ===== NOUVEAU DOSSIER PREMIUM ===== */
 
 .dossier-create-page {
-    min-height: calc(100vh - 120px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background:
         linear-gradient(135deg, rgba(250, 250, 250, 0.96), rgba(245, 245, 245, 0.92)),
         url('/img/fond.jpg') center center / cover no-repeat fixed;
@@ -1856,11 +1845,11 @@ footer {
 }
 
 .dossier-create-wrapper {
+    flex: 1;
     width: 90%;
     max-width: 900px;
     margin: 0 auto;
 }
-
 .dossier-create-header {
     text-align: center;
     margin-bottom: 34px;
@@ -2304,15 +2293,15 @@ footer {
 .services-cta-box h2 {
     font-size: 40px;
     margin-bottom: 20px;
+    color: #ffffff;
 }
 
 .services-cta-box p {
     max-width: 650px;
     margin: 0 auto 30px;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.92);
 }
-
 @media (max-width: 992px) {
 
     .contact-premium-grid {
@@ -2330,15 +2319,12 @@ footer {
 
 /* ===== PAGE VEHICULES PREMIUM ===== */
 
-body {
+.vehicules-page-wrapper {
     background:
         linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
         url('/img/fond.jpg') center center / cover no-repeat fixed;
 }
 
-main {
-    padding-top: 40px;
-}
 
 .page-title {
     font-size: 3rem;
@@ -2607,4 +2593,118 @@ main {
         min-width: 100%;
         height: 220px;
     }
+}
+
+/* =========================
+   MENTIONS LEGALES
+========================= */
+
+.mentions-container {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 60px;
+    background: rgba(15, 15, 15, 0.72);
+    border: 1px solid rgba(201, 163, 92, 0.2);
+    border-radius: 28px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+}
+
+.mentions-container h1 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 3rem;
+}
+.mentions-container h2 {
+    color: #c9a35c;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    border-left: 4px solid #c9a35c;
+}
+
+.mentions-container p,
+.mentions-container li,
+.mentions-container strong {
+    color: #ffffff;
+    line-height: 1.9;
+}
+
+.mentions-container ul {
+    padding-left: 25px;
+}
+
+.mentions-container a {
+    color: #c9a35c;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.mentions-container a:hover {
+    opacity: 0.8;
+}
+.mentions-container {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+.btn-retour {
+    display: inline-block;
+    margin-top: 50px;
+    padding: 14px 28px;
+    background: #c9a35c;
+    color: #111;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-retour:hover {
+    background: #d8b06a;
+    transform: translateY(-2px);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main,
+.dossier-create-page,
+.client-body,
+.admin-body {
+    flex: 1;
+}
+
+footer,
+.admin-footer {
+    position: relative;
+    width: 100%;
+    margin-top: auto;
+    z-index: 1;
+}
+
+.dossier-create-page {
+    min-height: auto;
+    padding: 70px 0 140px;
+}
+.dossier-create-wrapper {
+    margin-bottom: 80px;
+}
+
+.admin-footer,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+.dossier-detail-wrapper {
+    margin-bottom: 120px;
 }

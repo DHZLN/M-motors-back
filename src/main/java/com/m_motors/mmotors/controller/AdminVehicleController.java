@@ -8,52 +8,60 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/admin/vehicles")
+@RequestMapping("/admin/vehicules")
 public class AdminVehicleController {
 
-    private final VehicleService vehicleService;
 
-    public AdminVehicleController(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
-    }
+private final VehicleService vehicleService;
 
-    // 👉 LISTE
-    @GetMapping
-    public String listVehicles(Model model) {
-        model.addAttribute("vehicles", vehicleService.getAllVehicules());
-        return "admin/vehicules"; // ton HTML peut garder le nom français
-    }
+public AdminVehicleController(VehicleService vehicleService) {
+    this.vehicleService = vehicleService;
+}
 
-    // 👉 CREATE
-    @GetMapping("/new")
-    public String showCreateForm(Model model) {
-        model.addAttribute("vehicle", new Vehicle());
-        model.addAttribute("typesOffre", TypeOffre.values());
-        return "admin/vehicule-form";
-    }
+@GetMapping
+public String listVehicles(Model model) {
 
-    // 👉 SAVE
-    @PostMapping("/save")
-    public String saveVehicle(@ModelAttribute("vehicle") Vehicle vehicle) {
-        vehicleService.saveVehicule(vehicle);
-        return "redirect:/admin/vehicles";
-    }
+    model.addAttribute("vehicules", vehicleService.getAllVehicules());
 
-    // 👉 EDIT
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Vehicle vehicle = vehicleService.getVehiculeById(id)
-                .orElseThrow(() -> new RuntimeException("Véhicule introuvable"));
+    return "admin/vehicules";
+}
 
-        model.addAttribute("vehicle", vehicle);
-        model.addAttribute("typesOffre", TypeOffre.values());
-        return "admin/vehicule-form";
-    }
+@GetMapping("/new")
+public String showCreateForm(Model model) {
 
-    // 👉 DELETE
-    @PostMapping("/delete/{id}")
-    public String deleteVehicle(@PathVariable Long id) {
-        vehicleService.deleteVehicule(id);
-        return "redirect:/admin/vehicles";
-    }
+    model.addAttribute("vehicle", new Vehicle());
+    model.addAttribute("typesOffre", TypeOffre.values());
+
+    return "admin/vehicule-form";
+}
+
+@PostMapping("/save")
+public String saveVehicle(@ModelAttribute("vehicle") Vehicle vehicle) {
+
+    vehicleService.saveVehicule(vehicle);
+
+    return "redirect:/admin/vehicules";
+}
+
+@GetMapping("/edit/{id}")
+public String showEditForm(@PathVariable Long id, Model model) {
+
+    Vehicle vehicle = vehicleService.getVehiculeById(id)
+            .orElseThrow(() -> new RuntimeException("Véhicule introuvable"));
+
+    model.addAttribute("vehicle", vehicle);
+    model.addAttribute("typesOffre", TypeOffre.values());
+
+    return "admin/vehicule-form";
+}
+
+@PostMapping("/delete/{id}")
+public String deleteVehicle(@PathVariable Long id) {
+
+    vehicleService.deleteVehicule(id);
+
+    return "redirect:/admin/vehicules";
+}
+
+
 }
