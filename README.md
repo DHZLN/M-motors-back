@@ -1,146 +1,156 @@
-# M-motors
-🚗 M-Motors – Application de gestions et de ventes de véhicules
----
-📌 Présentation du projet
-
-M-Motors est une application web dédiée à la vente de véhicules d’occasion et à la location longue durée avec option d’achat (LLD/LOA).
-
-Ce projet est réalisé dans le cadre du Bachelor Développeur d’Application Java – STUDI.
-Il s’inscrit dans une stratégie de diversification des revenus de l’entreprise M-Motors et de modernisation de ses processus métiers, notamment par la dématérialisation complète des dossiers clients.
+# 🚗 M-Motors – Application de gestion et vente de véhicules
 
 ---
+
+## 📌 Présentation du projet
+
+M-Motors est une application web dédiée à la vente de véhicules d’occasion ainsi qu’à la location longue durée avec option d’achat (LLD/LOA).
+
+Ce projet a été réalisé dans le cadre du **Bachelor Concepteur Développeur d’Application – spécialité Java (STUDI)**.
+
+L’objectif principal du projet est de moderniser le parcours client de l’entreprise M-Motors à travers une solution digitale permettant la gestion complète du processus d’achat ou de location, de manière entièrement dématérialisée.
+
+---
+
 ## 🎯 Enjeux & objectifs métier
 
-- Introduire une nouvelle offre LLD avec option d’achat
-- Maintenir l’activité historique de vente de véhicules
-- Réduire les coûts opérationnels liés aux dossiers papier
-- Améliorer l’expérience client grâce à un espace personnel
-- Garantir la sécurité, la traçabilité et la continuité de service
-- Concevoir une solution scalable et évolutive hébergée dans le cloud
+* Introduire une offre de location longue durée avec option d’achat (LLD/LOA)
+* Maintenir l’activité historique de vente de véhicules
+* Dématérialiser les dossiers clients
+* Améliorer l’expérience utilisateur via un espace client dédié
+* Permettre un suivi simplifié des dossiers
+* Faciliter la gestion commerciale via un back-office administrateur
 
 ---
 
 ## ⚙️ Fonctionnalités principales (MVP)
 
-## 👤 Gestion des utilisateurs
-- Création de compte client
-- Authentification sécurisée
-- Accès différencié selon le rôle (client / back-office)
+### 👤 Gestion des utilisateurs
 
-## 🚘 Recherche & catalogue véhicules
-- Recherche de véhicules à l’achat ou en location longue durée
-- Consultation détaillée des fiches véhicules
-- Distinction claire des types d’offres
+* Création de compte client
+* Authentification sécurisée
+* Gestion des rôles (Administrateur / Client)
 
-## 📄 Gestion des dossiers clients
-- Dépôt de dossier d’achat ou de location en ligne
-- Téléversement des documents justificatifs
-- Dossier 100 % dématérialisé
+### 🚘 Catalogue véhicules
 
-## 🧾 Suivi des dossiers
-- Consultation de l’état d’avancement du dossier depuis l’espace client
-- Réduction des sollicitations du service commercial
+* Consultation des véhicules disponibles
+* Recherche de véhicules à l’achat ou en location
+* Visualisation détaillée des fiches véhicules
 
-## 🏢 Back-office commercial
-- Ajout et gestion des véhicules (vente / location)
-- Consultation des dossiers clients
-- Validation ou refus des dossiers
+### 📄 Gestion des dossiers
 
-## 🔐 Sécurité & continuité
-- Authentification via JWT (JSON Web Token)
-- Protection des données clients
-- Préparation aux exigences RPO / RTO
+* Dépôt de dossier d’achat ou de location
+* Téléversement des documents justificatifs
+* Gestion 100 % dématérialisée
 
-  ---
+### 🧾 Suivi client
+
+* Consultation de l’état d’avancement du dossier
+* Accès aux informations depuis l’espace personnel
+
+### 🏢 Back-office administrateur
+
+* Ajout, modification et suppression de véhicules
+* Gestion des offres achat/location
+* Consultation des dossiers clients
+* Validation ou refus des demandes
+
+### 🔐 Sécurité
+
+* Authentification sécurisée via Spring Security
+* Gestion des rôles utilisateurs
+* Chiffrement des mots de passe avec BCrypt
+* Gestion sécurisée des variables sensibles
+
+---
 
 ## 🧠 Méthodologie de gestion de projet
 
-- Méthodologie Agile : Scrum
-- Livraison incrémentale via MVP
-- Découpage fonctionnel par EPICs
-- Gestion du backlog produit
-- Prise en compte des notions :
-   - Definition of Ready (DoR)
-   - Definition of Done (DoD)
+Le projet a été développé selon une approche inspirée des principes **Agile / Scrum** avec une logique de développement incrémental orientée MVP (*Minimum Viable Product*).
+
+La démarche de développement reposait sur :
+
+* Analyse des besoins métier
+* Découpage fonctionnel en User Stories
+* Développement progressif des fonctionnalités
+* Validation continue des fonctionnalités développées
+* Gestion du versionning via Git/GitHub
 
 ---
 
 ## 🏗️ Architecture générale
-- Front-end : React (SPA)
-- Back-end : API REST Spring Boot
-- Base de données : MySQL (relationnelle)
-- Stockage documents : Google Cloud Storage (GCS)
-- Hébergement : Google Cloud Platform (GCP)
-- Déploiement : Heroku
+
+L’application repose sur une architecture **Spring Boot MVC monolithique** :
+
+* **Front-End :** Thymeleaf, HTML, CSS
+* **Back-End :** Java 17, Spring Boot
+* **Sécurité :** Spring Security, JWT, BCrypt
+* **Base de données :** H2 Database
+* **Déploiement :** Docker & Render
+* **Versionning :** Git / GitHub
 
 Architecture conçue pour :
- - Séparation front / back
- - Scalabilité
- - Évolutivité fonctionnelle
- - Intégrations futures (signature électronique, reporting, automatisation)
-   
---- 
+
+* Séparation des responsabilités (MVC)
+* Maintenabilité du code
+* Évolutivité fonctionnelle
+* Déploiement simplifié dans le cloud
+
+---
+
 ## 🛠️ Technologies utilisées
 
-## Langages
-- Java
-- JavaScript
-- HTML
-- CSS
-  
-## Outils de développement :
-- Vs Code
-  
-## Frameworks & bibliothèques
+### Langages
 
-- React – Interface utilisateur dynamique
-- Spring Boot  : Framework Web
-- Spring Security : Framework de sécurité
-- Spring Data JPA – Framework de gestion de base de données
-- JWT – Gestion des accès
+* Java 17
+* HTML
+* CSS
 
-## Base de données & stockage
+### Frameworks & bibliothèques
 
-- MySQL – Données structurées (clients, véhicules, dossiers)
-- Google Cloud Storage – Documents dématérialisés
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* Thymeleaf
+* JWT
+* BCrypt
 
-## Outils & DevOps*
+### Base de données
 
-- Git / GitHub
-- GitHub Actions (CI/CD)
-- Jira Software
-- Microsoft Teams
-  ---
+* H2 Database
+
+### Outils de développement
+
+* Visual Studio Code
+* Maven
+* Git / GitHub
+* Docker
+* Render
+
+---
 
 ## 🚀 Installation & démarrage
-## Prérequis
 
-- Java 17 ou +
-- Node.js
-- MySQL
-- Maven
-- Git
+### Prérequis
 
-  ## Installation :
- 1. Cloner le dépôt
-     ``` https://github.com/DHZLN/M-motors  ```
-    2. Configurer la base de données MySQL
-    3. Renseigner les variables dans :
-    4.  ``` backend/src/main/resources/application.yml ```
-        ``` spring:
-             datasource :
-               url : jdbc:mysql://localhost:3306/motors
-               username : your_username
-               password : your_password
+* Java 17+
+* Maven
+* Git
 
-            jwt:
-              secret : your_secret_key  ```
-    
+### Installation
 
+1. Cloner le dépôt GitHub
 
+2. Configurer les variables d’environnement nécessaires
 
+3. Lancer l’application :
 
+mvn spring-boot:run
 
-  
-  
+4. Accéder à l’application :
 
+http://localhost:8081
+
+### Console H2 (développement)
+
+http://localhost:8081/h2-console
